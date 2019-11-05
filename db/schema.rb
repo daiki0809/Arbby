@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_05_043059) do
+ActiveRecord::Schema.define(version: 2019_11_05_121848) do
 
   create_table "genres", force: :cascade do |t|
     t.text "genre_name"
@@ -44,11 +44,13 @@ ActiveRecord::Schema.define(version: 2019_11_05_043059) do
     t.integer "level_id", default: 1
     t.integer "notice_id", default: 1
     t.string "name", null: false
-    t.text "nickname", null: false
+    t.text "nickname"
     t.text "profile_image"
     t.integer "user_point", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "uid"
+    t.string "provider"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
