@@ -5,3 +5,26 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Genre.create!(
+	[
+		{
+			genre_name: '運動系'
+		},
+		{
+			genre_name: '頭脳系'
+		},
+		{
+			genre_name: '作る系'
+		},
+		{
+			genre_name: '学ぶ系'
+		},
+		{
+			genre_name: '自然系'
+		},
+		{
+			genre_name: 'その他'
+		}
+	]
+)

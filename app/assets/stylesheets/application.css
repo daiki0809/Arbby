@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+.img_prev {
+	width: 200px;
+	height: 200px;
+}

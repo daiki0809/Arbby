@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  genre_id: 1
+  images: 
+  title: MyText
+  body: MyText
+  budget: 1
+  hobby_point: 1
+
+two:
+  user_id: 1
+  genre_id: 1
+  images: 
+  title: MyText
+  body: MyText
+  budget: 1
+  hobby_point: 1
