@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_05_035730) do
+ActiveRecord::Schema.define(version: 2019_11_05_043059) do
+
+  create_table "genres", force: :cascade do |t|
+    t.text "genre_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "hobbies", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "genre_id"
+    t.json "images"
+    t.text "title"
+    t.text "body"
+    t.integer "budget"
+    t.integer "hobby_point"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false

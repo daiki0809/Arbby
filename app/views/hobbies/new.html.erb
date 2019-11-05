@@ -1,0 +1,43 @@
+<h1>投稿画面</h1>
+
+<%= form_for @hobby do |f| %>
+	<%= f.file_field :images, multiple: true, id: "hobby_img" %><br>
+	<div class="img_prev_index">
+<!-- 画像をプレビュ -->
+		<%= image_tag "sample.jpg", class: "img_prev img_prev_add_0" %>
+
+	</div>
+
+	<%= f.text_field :title, :placeholder => "タイトル" %><br>
+	<%= f.text_area :body, :placeholder => "説明" %>
+	<br>
+	<%= select_tag 'genre', options_from_collection_for_select(Genre.all, :id, :genre_name) %><br>
+
+	<%= f.number_field :budget, :placeholder => "予算" %>
+	<%= select_tag 'unit', options_for_select([['円', 'a'], ['千円','b'],['万円', 'c']]) %><br>
+	<%= f.label :hobby_point, "経験値設定" %><br>
+	<%= f.select :hobby_point, [1,2,3,4,5,6,7,8,9,10] %><br>
+
+	<%= f.submit "投稿する" %>
+
+<% end %>
+
+
+<script type="text/javascript">
+$(function() {
+   function readURL(input) {
+   	$('.img_prev_index').html("");
+       for(i=0; i<input.files.length; i++){
+       	reader = new FileReader();
+	    reader.readAsDataURL(input.files[i]);
+        reader.onload = function (e) {
+	      $('.img_prev_index').append('<img src="'+ e.target.result + '" class="img_prev img_prev_add">');
+	       }
+       }
+   }
+   $("#hobby_img").change(function(){
+       readURL(this);
+
+   });
+ });
+</script>
