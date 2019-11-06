@@ -10,11 +10,36 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require bxslider
  *= require_tree .
  *= require_self
  */
 
+ * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .img_prev {
 	width: 200px;
 	height: 200px;
+}
+
+.hobby_box {
+	float: left;
+	margin: 10px;
+}
+.hobby_img_index {
+	width: 300px;
+	height: 300px;
+}
+
+.hobby_img {
+	width: 300px;
+}
+
+.hobby_img_show {
+	width: 450px;
+	height: 400px;
 }
