@@ -2,7 +2,7 @@
 
 <%= form_for @hobby do |f| %>
 	<%= f.file_field :images, multiple: true, id: "hobby_img" %><br>
-	<div class="img_prev_index">
+	<div id="img_prev_index">
 <!-- 画像をプレビュ -->
 		<%= image_tag "sample.jpg", class: "img_prev img_prev_add_0" %>
 
@@ -26,12 +26,12 @@
 <script type="text/javascript">
 $(function() {
    function readURL(input) {
-   	$('.img_prev_index').html("");
+   	$('#img_prev_index').html("");
        for(i=0; i<input.files.length; i++){
        	reader = new FileReader();
 	    reader.readAsDataURL(input.files[i]);
         reader.onload = function (e) {
-	      $('.img_prev_index').append('<img src="'+ e.target.result + '" class="img_prev img_prev_add">');
+	      $('#img_prev_index').append('<img src="'+ e.target.result + '" class="img_prev img_prev_add">');
 	       }
        }
    }

@@ -3,6 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable
+
+         has_many :hobbies
 # ツイッターでログインの記述
     def self.find_for_oauth(auth)
     	user = User.where(uid: auth.uid, provider: auth.provider).first
@@ -15,7 +17,6 @@ class User < ApplicationRecord
          		password: Devise.friendly_token[0, 20],
          		profile_image: auth.info.image,
          		name: auth.info.name,
-         		nickname: auth.info.nickname,
          		)
          end
 

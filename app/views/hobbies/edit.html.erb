@@ -1,2 +1,44 @@
-<h1>Hobbies#edit</h1>
-<p>Find me in app/views/hobbies/edit.html.erb</p>
+<h1>編集画面</h1>
+
+<%= form_for @hobby do |f| %>
+	<%= f.file_field :images, multiple: true, id: "hobby_img_edit" %><br>
+	<div id="img_prev_show">
+<!-- 画像をプレビュ -->
+		<% @hobby.images.each do |i| %>
+			<%= image_tag i.to_s, class: "img_prev" %>
+		<% end %>
+	</div>
+
+	<%= f.text_field :title %><br>
+	<%= f.text_area :body %>
+	<br>
+	<%= select_tag 'genre', options_from_collection_for_select(Genre.all, :id, :genre_name, { :selected => @hobby.genre_id }) %><br>
+
+	<%= number_field_tag 'provisional' %>
+	<%= select_tag 'unit', options_for_select([['円', 'a'], ['千円','b'],['万円', 'c']]) %><br>
+	<%= f.label :hobby_point, "経験値設定" %><br>
+	<%= f.select :hobby_point, [1,2,3,4,5,6,7,8,9,10] %><br>
+
+	<%= f.submit "投稿する" %>
+
+<% end %>
+
+
+<script type="text/javascript">
+$(function() {
+   function readURL(input) {
+   	$('#img_prev_show').html("");
+       for(i=0; i<input.files.length; i++){
+       	reader = new FileReader();
+	    reader.readAsDataURL(input.files[i]);
+        reader.onload = function (e) {
+	      $('#img_prev_show').append('<img src="'+ e.target.result + '" class="img_prev img_prev_add">');
+	       }
+       }
+   }
+   $("#hobby_img_edit").change(function(){
+       readURL(this);
+
+   });
+ });
+</script>

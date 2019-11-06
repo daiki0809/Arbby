@@ -17,14 +17,28 @@ class HobbiesController < ApplicationController
   end
 
   def index
+    @hobbies = Hobby.all
   end
 
   def show
+    @hobby = Hobby.find(params[:id])
   end
 
   def edit
+    @hobby = Hobby.find(params[:id])
   end
 
+  def update
+    hobby = Hobby.find(params[:id])
+    hobby.genre_id = params[:genre]
+    if params[:unit] == "b"
+      hobby.budget = params[:provisional].to_i * 1000
+    elsif params[:unit] == "c"
+      hobby.budget = params[:provisional].to_i * 10000
+    end
+    hobby.update(hobby_params)
+    redirect_to hobby_path(hobby.id)
+  end
   private
 
   	def hobby_params

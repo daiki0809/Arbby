@@ -1,2 +1,26 @@
-<h1>Hobbies#show</h1>
-<p>Find me in app/views/hobbies/show.html.erb</p>
+
+<!-- 写真が一枚ならスライドショーをさせない -->
+<% if @hobby.images.length == 1 %>
+	<div class="bx-wrapper">
+<% else %>
+	<div class="slider_show">
+<% end %>
+	<% @hobby.images.each do |i| %>
+		<%= image_tag i.to_s, class: "hobby_img_show" %>
+	<% end %>
+	</div>
+
+<% if @hobby.user.nickname == nil %>
+	<p><%= @hobby.user.name %></p>
+<% else %>
+	<P><%= @hobby.user.nickname %></P>
+<% end %>
+
+<h3><%= @hobby.title %></h3>
+<p><%= @hobby.body %></p>
+<p><%= @hobby.budget %></p>
+
+<% if @hobby.user == current_user %>
+	<p><%= link_to '編集する', edit_hobby_path(@hobby.id) %>
+	</p>
+<% end %>

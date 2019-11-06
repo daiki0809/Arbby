@@ -1,16 +1,28 @@
-<h1>Hobbies#index</h1>
-<p>Find me in app/views/hobbies/index.html.erb</p>
+<h1>趣味一覧</h1>
 
-<ul>
-<%if user_signed_in? %>
-  <li><%=current_user.email%></li>
- 
-<li><%=current_user.name%></li>
-<li><%=current_user.nickname%></li>
-<li><%=current_user.profile_image%></li>
-
-  <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
-  <%else%>
-        <li><%= link_to "ログイン", new_user_session_path %></li>
-      <%end%>
-    </ul>
+<% @hobbies.each do |hobby| %>
+		<div class= hobby_box >
+			<p><%= hobby.user.profile_image %>
+				<% if hobby.user.nickname == nil %>
+					<%= hobby.user.name %>
+				<% else %>
+					<%= hobby.user.nickname %>
+				<% end %>
+			</p>
+				<%= link_to hobby_path(hobby.id) do %>
+				<div class="hobby_img">
+					<!-- 写真が一枚ならスライドショーをさせない -->
+					<% if hobby.images.length == 1 %>
+						<div class="bx-wrapper">
+					<% else %>
+						<div class="slider_index">
+					<% end %>
+							<% hobby.images.each do |i| %>
+								<%= image_tag i.to_s, class: "hobby_img_index" %>
+							<% end %>
+						</div>
+					<p><%= hobby.title %></p>
+				</div>
+			<% end %>
+		</div>
+<% end %>
