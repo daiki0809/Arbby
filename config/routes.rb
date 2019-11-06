@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   get 'homes/about'
   get 'homes/check'
 
-  resources :hobbies, only: [:new, :index, :show, :edit, :create, :update]
+  resources :hobbies, only: [:new, :index, :show, :edit, :create, :update, :destroy]
 end

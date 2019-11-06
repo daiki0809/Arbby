@@ -39,6 +39,13 @@ class HobbiesController < ApplicationController
     hobby.update(hobby_params)
     redirect_to hobby_path(hobby.id)
   end
+
+  def destroy
+    hobby = Hobby.find(params[:id])
+    hobby.destroy
+    redirect_to hobbies_path
+  end
+
   private
 
   	def hobby_params
