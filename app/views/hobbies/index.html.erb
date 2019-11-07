@@ -2,25 +2,38 @@
 
 <% @hobbies.each do |hobby| %>
 		<div class= hobby_box >
-			<p><%= hobby.user.profile_image %>
-				<% if hobby.user.nickname == nil %>
-					<%= hobby.user.name %>
-				<% else %>
-					<%= hobby.user.nickname %>
-				<% end %>
-			</p>
-				<%= link_to hobby_path(hobby.id) do %>
+			<% if hobby.user.profile_image? %>
+				<%= image_tag hobby.user.profile_image.to_s, class: "round_img hobby_index_profile_img" %>
+			<% else %>
+				<img src="../../assets/default.png" class="round_img hobby_index_profile_img">
+			<% end %>
+
+			<% if hobby.user.nickname == nil %>
+				<%= hobby.user.name %>
+			<% else %>
+				<%= hobby.user.nickname %>
+			<% end %>
+				<br>
+
+			<%= link_to hobby_path(hobby.id) do %>
 				<div class="hobby_img">
-					<!-- 写真が一枚ならスライドショーをさせない -->
-					<% if hobby.images.length == 1 %>
+					<!-- 写真がなければノーイメージを表示-->
+					<% if hobby.images. == [] %>
 						<div class="bx-wrapper">
-					<% else %>
-						<div class="slider_index">
-					<% end %>
-							<% hobby.images.each do |i| %>
-								<%= image_tag i.to_s, class: "hobby_img_index" %>
-							<% end %>
+							<img src="../../assets/hobby_no_image.jpeg" class="hobby_img_index">
 						</div>
+					<% else %>
+					<!-- 写真が一枚ならスライドショーをさせない -->
+						<% if hobby.images.length == 1 %>
+							<div class="bx-wrapper">
+						<% else %>
+							<div class="slider_index">
+						<% end %>
+								<% hobby.images.each do |i| %>
+									<%= image_tag i.to_s, class: "hobby_img_index" %>
+								<% end %>
+							</div>
+					<% end %>
 					<p><%= hobby.title %></p>
 				</div>
 			<% end %>
