@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_05_121848) do
+ActiveRecord::Schema.define(version: 2019_11_07_112009) do
+
+  create_table "challenges", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "hobby_id"
+    t.integer "times", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "genres", force: :cascade do |t|
     t.text "genre_name"

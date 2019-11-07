@@ -1,0 +1,11 @@
+<% if hobby.challenge_by?(current_user) %>
+	<%= link_to hobby_challenges_path(hobby.id), method: :delete, remote: true do %>
+		<i class="fas fa-fire-alt fa-3x fire_icon"></i>
+	<% end %>
+	<%= hobby.challenges.count %> チャレンジ
+<% else %>
+	<%= link_to hobby_challenges_path(hobby.id), method: :post, remote: true do %>
+		<i class="fas fa-fire-alt fa-3x"></i>
+	<% end %>
+	<%= hobby.challenges.count %> チャレンジ
+<% end %>
