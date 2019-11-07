@@ -10,5 +10,8 @@ Rails.application.routes.draw do
   get 'homes/check'
 
   resources :users, only: [:show, :edit, :update, :destroy]
-  resources :hobbies, only: [:new, :index, :show, :edit, :create, :update, :destroy]
+
+  resources :hobbies, only: [:new, :index, :show, :edit, :create, :update, :destroy] do
+        resource :challenges, only: [:create, :destroy]
+  end
 end

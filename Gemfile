@@ -77,3 +77,5 @@ gem 'omniauth-twitter'
 gem 'dotenv-rails'
 
 gem 'bxslider-rails'
+
+gem 'bootstrap', '~> 4.1.1'

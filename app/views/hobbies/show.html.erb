@@ -16,6 +16,11 @@
 		</div>
 <% end %>
 
+<!-- チャレンジボタン -->
+<div id="challenge_button">
+	<%= render 'challenges/button', hobby: @hobby %>
+</div><br>
+
 <% if @hobby.user.profile_image? %>
 	<%= image_tag @hobby.user.profile_image.to_s,  class: "round_img profile_image_show" %>
 <% else %>
@@ -34,7 +39,7 @@
 <p><%= @hobby.budget %></p>
 
 <% if @hobby.user == current_user %>
-	<p><%= link_to '編集する', edit_hobby_path(@hobby.id) %> / 
+	<p><%= link_to '編集する', edit_hobby_path(@hobby.id) %> /
 		<%= link_to '削除する', hobby_path, method: :delete %>
 	</p>
 <% end %>

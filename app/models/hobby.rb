@@ -1,9 +1,11 @@
 class Hobby < ApplicationRecord
 	mount_uploaders :images, ImageUploader
 
+	has_many :challenges, dependent: :destroy
+
 	belongs_to :genre
 	belongs_to :user
-	
+
 		with_options presence: true do
 		validates :user_id
 		validates :genre_id
@@ -11,5 +13,10 @@ class Hobby < ApplicationRecord
 		validates :body
 		validates :budget
 		validates :hobby_point
+	end
+
+# ユーザがチャレンジをすでに押しているか？
+	def challenge_by?(user)
+		challenges.where(user_id: user.id).exists?
 	end
 end
