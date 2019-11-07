@@ -1,0 +1,32 @@
+<%= form_for @user do |f| %>
+	<%= f.file_field :profile_image, id: "profile_image" %><br>
+	<div id="img_prev_user_box">
+<!-- 画像をプレビュ -->
+		<% if @user.profile_image? %>
+			<%= image_tag @user.profile_image.to_s, id: "img_prev_user", class: "round_img" %><br>
+		<% else %>
+			<img src="../../assets/default.png" id="img_prev_user" class="round_img"><br>
+		<% end %>
+	</div>
+
+	<%= f.text_field :name %><br>
+	<%= f.text_field :nickname %><br>
+	<%= f.submit '更新する' %><br>
+	<p>退会する</p>
+
+<% end %>
+
+<script type="text/javascript">
+  $(function() {
+    function readURL(input) {
+       var reader = new FileReader();
+       reader.onload = function (e) {
+    $('#img_prev_user').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+    $("#profile_image").change(function(){
+        readURL(this);
+    });
+  });
+</script>

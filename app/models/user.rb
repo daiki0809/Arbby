@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable
 
+         mount_uploader :profile_image, ProfileImageUploader
+
          has_many :hobbies
 # ツイッターでログインの記述
     def self.find_for_oauth(auth)

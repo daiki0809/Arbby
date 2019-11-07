@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  get 'users/show'
   root :to => 'homes#top'
   
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
@@ -8,5 +9,6 @@ Rails.application.routes.draw do
   get 'homes/about'
   get 'homes/check'
 
+  resources :users, only: [:show, :edit, :update, :destroy]
   resources :hobbies, only: [:new, :index, :show, :edit, :create, :update, :destroy]
 end
