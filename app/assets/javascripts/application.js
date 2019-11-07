@@ -44,3 +44,8 @@ jQuery(document).on('turbolinks:load', function(){
 	    autoHover: true       // ホバー時に自動スライドを停止
 	  });
 	});
+
+$("#challenge_icon").click(function() {
+	console.log("test")
+	$("#challenge_icon").removeClass("fa-3x").addClass("fa-4x");
+});
