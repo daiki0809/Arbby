@@ -1,0 +1,6 @@
+$("#challenge_times_<%= @challenge.id %>").html("<%= @challenge.times %> 回");
+$("#user_level").html("レベル.<%= @user.level_id %>");
+
+<% if @level_up %>
+	$('#modal-level-up').modal('show');
+<% end %>
