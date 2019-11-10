@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
          has_many :hobbies
          has_many :challenges
+
+         belongs_to :level
 # ツイッターでログインの記述
     def self.find_for_oauth(auth)
     	user = User.where(uid: auth.uid, provider: auth.provider).first

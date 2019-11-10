@@ -28,3 +28,15 @@ Genre.create!(
 		}
 	]
 )
+
+Level.create!(
+	[
+		{
+			level_point: 0
+		}
+	]
+	)
+
+99.times do |n|
+	Level.create(level_point: 3 * (n + 1) + Level.find(n + 1).level_point)
+end
