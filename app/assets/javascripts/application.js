@@ -14,6 +14,7 @@
 //= require jquery
 //= require popper
 //= require bootstrap-sprockets
+//= require Chart.min
 //= require rails-ujs
 //= require bxslider
 //= require activestorage

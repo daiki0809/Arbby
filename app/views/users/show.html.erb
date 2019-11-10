@@ -14,6 +14,10 @@
 
 	<P>レベル.<%= @user.level_id %></P>
 
+	<!-- 次のレベルまで -->
+	<canvas id="myChart" width="200" height="80"></canvas>
+	<script>gauge();</script>
+
 	<p><%= link_to '編集', edit_user_path(@user.id) %>
 	</p>
 </div>
