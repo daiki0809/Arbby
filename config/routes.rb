@@ -14,4 +14,6 @@ Rails.application.routes.draw do
   resources :hobbies, only: [:new, :index, :show, :edit, :create, :update, :destroy] do
         resource :challenges, only: [:create, :destroy]
   end
+
+  resources :levels, only: [:update]
 end
