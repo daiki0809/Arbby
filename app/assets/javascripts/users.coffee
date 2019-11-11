@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-window.gauge = -> 
+window.gauge = (percentage) -> 
     ctx = document.getElementById("myChart").getContext('2d')
 
     myChart = new Chart(ctx, {
@@ -11,7 +11,7 @@ window.gauge = ->
             labels: [""],
             datasets: [{
                 label: '次のレベルまで',
-                data: [gon.percentage],
+                data: [percentage],
                 backgroundColor: [
                     'rgba(0, 30, 200, 0.2)'
                 ],

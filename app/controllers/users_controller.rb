@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     level_point = @user.level.level_point
     next_point = Level.find(@user.level_id + 1).level_point - level_point
     actual_point = @user.user_point - level_point
-    gon.percentage = (actual_point / next_point.to_f) * 100
+    @percentage = (actual_point / next_point.to_f) * 100
   end
 
   def edit
