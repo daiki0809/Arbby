@@ -4,3 +4,7 @@ $("#user_level").html("レベル.<%= @user.level_id %>");
 <% if @level_up %>
 	$('#modal-level-up').modal('show');
 <% end %>
+
+
+$("#next_level").html("<%= j(render 'users/gauge', percentage: @percentage) %>");
+

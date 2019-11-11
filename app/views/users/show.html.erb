@@ -16,8 +16,7 @@
 
 	<!-- 次のレベルまで -->
 	<div id="next_level">
-		<canvas id="myChart" width="200" height="80"></canvas>
-		<script>gauge();</script>
+		<%= render 'gauge', percentage: @percentage %>
 	</div>
 
 	<p><%= link_to '編集', edit_user_path(@user.id) %>
@@ -25,6 +24,8 @@
 </div>
 
 <div class="modal fade" id="modal-level-up" tabindex="-1">
+
+
     <div class="modal-dialog">
 
         <!-- 3.モーダルのコンテンツ -->
@@ -42,10 +43,10 @@
             </div>
             <!-- 6.モーダルのフッタ -->
             <div class="modal-footer">
-            	<button type="button" class="btn btn-default">
-	            	<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="<%= @user.level_id %>レベルに上がったよ！!&#13;&#10;&#13;&#10;" data-via="okFLj0oH6N9IFuK" data-hashtags="Arbby&#13;&#10;" data-lang="ja" data-show-count="false">
+	            <button type="button" class="btn btn-default">
+	            	<a href="https://twitter.com/intent/tweet">
 	            		<i class="fab fa-twitter-square">
-	            			つぶやく
+	            			ツイートする
 	            		</i>
 	            	</a>
 	            </button>
@@ -130,3 +131,6 @@
 	<% end %>
 	</div>
 </div>
+
+<script src="https://platform.twitter.com/widgets.js" charset="utf-8">
+</script>
