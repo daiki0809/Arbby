@@ -78,7 +78,7 @@ gem 'dotenv-rails'
 
 gem 'bxslider-rails'
 
-gem 'bootstrap', '~> 4.1.1'
+gem 'bootstrap', '~> 4.3.1'
 
 gem 'chart-js-rails', '~> 0.1.4'
 
