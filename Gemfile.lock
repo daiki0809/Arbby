@@ -156,6 +156,8 @@ GEM
       omniauth-oauth (~> 1.1)
       rack
     orm_adapter (0.5.0)
+    paranoia (2.4.2)
+      activerecord (>= 4.0, < 6.1)
     popper_js (1.14.5)
     pry (0.12.2)
       coderay (~> 1.1.0)
@@ -283,6 +285,7 @@ DEPENDENCIES
   mini_magick
   omniauth
   omniauth-twitter
+  paranoia
   pry-byebug
   pry-doc
   pry-rails

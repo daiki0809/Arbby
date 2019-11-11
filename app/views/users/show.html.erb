@@ -19,8 +19,8 @@
 		<%= render 'gauge', percentage: @percentage %>
 	</div>
 
-	<p><%= link_to '編集', edit_user_path(@user.id) %>
-	</p>
+	<button class="btn"><%= link_to '編集', edit_user_path(@user.id) %>
+	</button>
 </div>
 
 <div class="modal fade" id="modal-level-up" tabindex="-1">
