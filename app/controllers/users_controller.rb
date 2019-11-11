@@ -18,6 +18,11 @@ class UsersController < ApplicationController
   	redirect_to user_path(user.id)
   end
 
+  def destroy
+    current_user.really_destroy!
+    redirect_to root_path
+  end
+
   private
    def user_params
    	params.require(:user).permit(:name, :nickname, :profile_image)

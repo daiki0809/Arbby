@@ -12,8 +12,7 @@
 	<%= f.text_field :name %><br>
 	<%= f.text_field :nickname %><br>
 	<%= f.submit '更新する' %><br>
-	<p>退会する</p>
-
+	<%= link_to '退会', user_path(@user.id), method: :delete %>
 <% end %>
 
 <script type="text/javascript">

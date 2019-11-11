@@ -83,3 +83,5 @@ gem 'bootstrap', '~> 4.1.1'
 gem 'chart-js-rails', '~> 0.1.4'
 
 gem 'gon'
+
+gem 'paranoia'
