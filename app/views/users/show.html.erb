@@ -127,10 +127,31 @@
 				<% end %>
 				<p id="challenge_times_<%= challenge.id %>"><%= challenge.times %> 回</p>
 
+				<%= form_for(Event.new) do |f| %>
+					  <%= f.label :title, "イベント名"%>
+					  <%= f.text_field :title, class: 'form-control' %>
+					  <div style="position: relative;">
+						  <label class="control-label" for="">開始日</label>
+						  <%= f.text_field :start, class: 'form-control datetimepicker-input', data: {toggle: "datetimepicker", target: "#event_start"} %>
+						</div>
+
+	  				<div style="position: relative;">
+					  <label class="control-label" for="">終了日</label>
+					  <%= f.text_field :end, class: 'form-control datetimepicker-input', data: {toggle: "datetimepicker", target: "#event_end"} %>
+					</div>
+
+					  <%= f.submit '登録', class: 'btn btn-primary' %>
+					<% end %>
 			</div>
 	<% end %>
 	</div>
 </div>
 
 <script src="https://platform.twitter.com/widgets.js" charset="utf-8">
+</script>
+<script type="text/javascript">
+    $(function () {
+        $('#event_start').datetimepicker();
+        $('#event_end').datetimepicker();
+    });
 </script>

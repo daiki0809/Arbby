@@ -12,14 +12,20 @@
 //
 //= require turbolinks
 //= require jquery
+//= require moment
+//= require moment/ja.js
+//= require fullcalendar
 //= require popper
 //= require bootstrap-sprockets
+//= require tempusdominus-bootstrap-4.js
 //= require Chart.min
 //= require rails-ujs
 //= require bxslider
 //= require activestorage
 
 //= require_tree .
+
+// スライドショー
 jQuery(document).on('turbolinks:load', function(){
 	  $('.slider_index').bxSlider({
 	    auto: true,           // 自動スライド
@@ -46,7 +52,101 @@ jQuery(document).on('turbolinks:load', function(){
 	  });
 	});
 
-$("#challenge_icon").click(function() {
-	console.log("test")
-	$("#challenge_icon").removeClass("fa-3x").addClass("fa-4x");
+// カレンダー
+$(document).ready(function() {
+    var currentEvents = $('#current_events').data('event-id');
+    console.log(currentEvents);
+    $('#calendar').fullCalendar({
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+      },
+      navLinks: true,
+      selectable: true,
+      selectHelper: true,
+    	events: currentEvents,
+    	editable: true
+    })
+
+    var prepare = function(options, originalOptions, jqXHR) {
+      var token;
+      if (!options.crossDomain) {
+        token = $('meta[name="csrf-token"]').attr('content');
+        if (token) {
+          return jqXHR.setRequestHeader('X-CSRF-Token', token);
+        }
+      }
+    };
+
+    create_event = function(title, start, end){
+      $.ajaxPrefilter(prepare);
+      $.ajax({
+        type: "post",
+        url: "/events/create",
+        data: {
+          title: title,
+          start: start.toISOString(),
+          end: end.toISOString()
+        }
+      }).done(function(data){
+        alert("登録しました!");
+      }).fail(function(data){
+        alert("登録できませんでした。");
+      });
+    };
+
+    update_event = function(id, title, start, end){
+      $.ajaxPrefilter(prepare);
+      $.ajax({
+        type: "post",
+        url: '/events/update',
+        data: {
+          id: id,
+          title: title,
+          start: start.toISOString(),
+          end: end.toISOString()
+        }
+      }).done(function(data){
+        alert("更新しました!");
+      }).fail(function(data){
+        alert("更新できませんでした。");
+      });
+    };
+
+    $('#calendar').fullCalendar({
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+      },
+      navLinks: true,
+      selectable: true,
+      selectHelper: true,
+      select: function(start, end) {
+        var title = prompt('イベントを追加');
+        var eventData;
+        if (title) {
+          eventData = {
+            title: title,
+            start: start,
+            end: end
+          };
+          $('#calendar').fullCalendar('renderEvent', eventData, true);
+          $('#calendar').fullCalendar('unselect');
+          create_event(title, start, end);
+        }
+      },
+      eventClick: function(event, element) {
+        var title = prompt('イベントを変更');
+        event.title = title;
+        $('#calendar').fullCalendar('updateEvent', event);
+        update_event(event.id, title, event.start, event.end);
+      },
+      timezone: 'UTC',
+      events: current_events,
+      editable: true
+    });
+
 });
+

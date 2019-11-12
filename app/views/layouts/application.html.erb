@@ -16,7 +16,7 @@
     <header>
       <ul>
         <% if user_signed_in? %>
-
+        <div id="current_events" data-event-id="<%= current_user.events.to_json %>"></div>
           <% if current_user.nickname? %>
             <li><%= link_to current_user.nickname, user_path(current_user.id) %></li>
           <% else %>

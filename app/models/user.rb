@@ -7,8 +7,8 @@ class User < ApplicationRecord
          mount_uploader :profile_image, ProfileImageUploader
 
          has_many :hobbies, dependent: :destroy
-
          has_many :challenges, dependent: :destroy
+         has_many :events, dependent: :destroy
 
 
          belongs_to :level

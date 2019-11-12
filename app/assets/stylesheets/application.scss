@@ -13,10 +13,13 @@
  *= require bxslider
  *= require_tree .
  *= require_self
+ *= require fullcalendar
  */
 
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
+@import "font-awesome";
+@import "tempusdominus-bootstrap-4.css";
 
  * {
   margin: 0;
