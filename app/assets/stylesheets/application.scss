@@ -13,10 +13,13 @@
  *= require bxslider
  *= require_tree .
  *= require_self
+ *= require fullcalendar
  */
 
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
+@import "font-awesome";
+@import "tempusdominus-bootstrap-4.css";
 
  * {
   margin: 0;
@@ -97,7 +100,27 @@
 	background-color: red;
 }
 
-.modal-content {
+.modal-level {
 	opacity: 0.9;
 	background-color: #33CCFF;
+}
+
+.date_time {
+	position: relative;
+}
+
+.fc-sun {
+ color: red;
+}
+
+.fc-sat {
+ color: blue;
+}
+
+.fc-time {
+	color: white;
+}
+
+.fc-title {
+	color: white;
 }

@@ -79,9 +79,17 @@ gem 'dotenv-rails'
 gem 'bxslider-rails'
 
 gem 'bootstrap', '~> 4.1.1'
+gem 'bootstrap4-datetime-picker-rails'
 
 gem 'chart-js-rails', '~> 0.1.4'
 
 gem 'gon'
 
 gem 'paranoia'
+
+gem 'fullcalendar-rails'
+
+gem 'momentjs-rails'
+
+gem 'font-awesome-rails'
+

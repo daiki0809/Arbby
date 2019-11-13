@@ -16,7 +16,7 @@
     <header>
       <ul>
         <% if user_signed_in? %>
-
+        <div id="current_events" data-event-id="<%= current_user.events.to_json %>"></div>
           <% if current_user.nickname? %>
             <li><%= link_to current_user.nickname, user_path(current_user.id) %></li>
           <% else %>
@@ -25,6 +25,32 @@
 
           <li><%= link_to "趣味一覧へ", hobbies_path %>
           </li>
+          <li>
+            <div data-toggle="modal" data-target="#modal-calendar">
+                カレンダー
+            </div>
+          </li>
+
+          <!-- モーダルの中身 -->
+            <div class="modal fade" id="modal-calendar" tabindex="-1"
+                  role="dialog" aria-labelledby="label-calendar" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content modal-my-calendar">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div id="calendar"></div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
           </li>
         <% else %>

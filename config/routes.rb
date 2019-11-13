@@ -16,4 +16,6 @@ Rails.application.routes.draw do
   end
 
   resources :levels, only: [:update]
+  resources :events, only: [:create, :update]
+
 end
