@@ -100,7 +100,27 @@
 	background-color: red;
 }
 
-.modal-content {
+.modal-level {
 	opacity: 0.9;
 	background-color: #33CCFF;
+}
+
+.date_time {
+	position: relative;
+}
+
+.fc-sun {
+ color: red;
+}
+
+.fc-sat {
+ color: blue;
+}
+
+.fc-time {
+	color: white;
+}
+
+.fc-title {
+	color: white;
 }

@@ -22,7 +22,6 @@
 //= require rails-ujs
 //= require bxslider
 //= require activestorage
-
 //= require_tree .
 
 // スライドショー
@@ -35,7 +34,8 @@ jQuery(document).on('turbolinks:load', function(){
 	    maxSlides: 1,         // 一度に表示させる最大数
 	    slideWidth: 300,      // 各スライドの幅
 		randomStart: true,    // 最初に表示するスライドをランダムに設定
-	    autoHover: true       // ホバー時に自動スライドを停止
+	    autoHover: true,      // ホバー時に自動スライドを停止
+	    nextSelector:'#next-btn-none'
 	  });
 	});
 
@@ -48,105 +48,60 @@ jQuery(document).on('turbolinks:load', function(){
 	    maxSlides: 1,         // 一度に表示させる最大数
 	    slideWidth: 450,      // 各スライドの幅
 		randomStart: true,    // 最初に表示するスライドをランダムに設定
-	    autoHover: true       // ホバー時に自動スライドを停止
+	    autoHover: true,       // ホバー時に自動スライドを停止
+	    nextSelector:'#next-btn-none'
 	  });
 	});
 
 // カレンダー
 $(document).ready(function() {
     var currentEvents = $('#current_events').data('event-id');
-    console.log(currentEvents);
     $('#calendar').fullCalendar({
+      lang: 'ja',
       header: {
         left: 'prev,next today',
         center: 'title',
         right: 'month,agendaWeek,agendaDay'
       },
+
+
+      // 時間の書式
+        timeFormat: 'H(:mm)',
+
+       // ボタン文字列
+      buttonText: {
+            today:    '今日',
+            month:    '月',
+            week:     '週',
+            day:      '日'
+      },
+
       navLinks: true,
       selectable: true,
-      selectHelper: true,
-    	events: currentEvents,
-    	editable: true
-    })
+      selectHelper: false,
+      events: currentEvents,
+      editable: false,
 
-    var prepare = function(options, originalOptions, jqXHR) {
-      var token;
-      if (!options.crossDomain) {
-        token = $('meta[name="csrf-token"]').attr('content');
-        if (token) {
-          return jqXHR.setRequestHeader('X-CSRF-Token', token);
+      views: {
+        month: {
+            titleFormat: "YYYY年 MMMM",
+        },
+        week: {
+            columnFormat: "dddd",
+        },
+        day: {
+            titleFormat: "YYYY年　MMMM d日　dddd   ",
         }
-      }
-    };
+    },
+       // 月名称
+        monthNames: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+        // 月略称
+        monthNamesShort: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+        // 曜日名称
+        dayNames: ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'],
+        // 曜日略称
+        dayNamesShort: ['日', '月', '火', '水', '木', '金', '土']
 
-    create_event = function(title, start, end){
-      $.ajaxPrefilter(prepare);
-      $.ajax({
-        type: "post",
-        url: "/events/create",
-        data: {
-          title: title,
-          start: start.toISOString(),
-          end: end.toISOString()
-        }
-      }).done(function(data){
-        alert("登録しました!");
-      }).fail(function(data){
-        alert("登録できませんでした。");
-      });
-    };
-
-    update_event = function(id, title, start, end){
-      $.ajaxPrefilter(prepare);
-      $.ajax({
-        type: "post",
-        url: '/events/update',
-        data: {
-          id: id,
-          title: title,
-          start: start.toISOString(),
-          end: end.toISOString()
-        }
-      }).done(function(data){
-        alert("更新しました!");
-      }).fail(function(data){
-        alert("更新できませんでした。");
-      });
-    };
-
-    $('#calendar').fullCalendar({
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month,agendaWeek,agendaDay'
-      },
-      navLinks: true,
-      selectable: true,
-      selectHelper: true,
-      select: function(start, end) {
-        var title = prompt('イベントを追加');
-        var eventData;
-        if (title) {
-          eventData = {
-            title: title,
-            start: start,
-            end: end
-          };
-          $('#calendar').fullCalendar('renderEvent', eventData, true);
-          $('#calendar').fullCalendar('unselect');
-          create_event(title, start, end);
-        }
-      },
-      eventClick: function(event, element) {
-        var title = prompt('イベントを変更');
-        event.title = title;
-        $('#calendar').fullCalendar('updateEvent', event);
-        update_event(event.id, title, event.start, event.end);
-      },
-      timezone: 'UTC',
-      events: current_events,
-      editable: true
     });
-
 });
 

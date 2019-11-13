@@ -92,3 +92,4 @@ gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 
 gem 'font-awesome-rails'
+
