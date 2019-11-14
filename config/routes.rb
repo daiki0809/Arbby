@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   end
 
   resources :levels, only: [:update]
-  resources :events, only: [:create, :update]
+  resources :events, only: [:create, :index, :update, :destroy]
+  get 'events/catch'
 
 end

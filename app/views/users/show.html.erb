@@ -1,182 +1,193 @@
-<div class="user_info">
+	<div class="user_info">
 
-	<% if @user.profile_image? %>
-		<%= image_tag @user.profile_image.to_s, class: "profile_image_show round_img" %>
-	<% else %>
-		<img src="../../assets/default.png" id="img_prev_user"><br>
-	<% end %>
-
-	<% if @user.nickname == nil %>
-		<h3><%= @user.name %></h3>
-	<% else %>
-		<h3><%= @user.nickname %></h3>
-	<% end %>
-
-	<P id="user_level">レベル.<%= @user.level_id %></P>
-
-	<!-- 次のレベルまで -->
-	<div id="next_level">
-		<%= render 'gauge', percentage: @percentage %>
-	</div>
-
-	<button class="btn"><%= link_to '編集', edit_user_path(@user.id) %>
-	</button>
-</div>
-
-<div class="modal fade" id="modal-level-up" tabindex="-1">
-
-
-    <div class="modal-dialog">
-
-        <!-- 3.モーダルのコンテンツ -->
-        <div class="modal-content modal-level">
-            <!-- 4.モーダルのヘッダ -->
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="modal-label">レベルがアップしました！！</h4>
-            </div>
-            <!-- 5.モーダルのボディ -->
-            <div class="modal-body">
-                ツイッターでレベルアップをつぶやこう！
-            </div>
-            <!-- 6.モーダルのフッタ -->
-            <div class="modal-footer">
-	            <button type="button" class="btn btn-default">
-	            	<a href="https://twitter.com/intent/tweet">
-	            		<i class="fab fa-twitter-square">
-	            			ツイートする
-	            		</i>
-	            	</a>
-	            </button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<ul class="nav nav-tabs" id="myTab" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" id="hobby-tab" data-toggle="tab" href="#hobby" role="tab" aria-controls="hobby" aria-selected="true">my hobby</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="challenge-tab" data-toggle="tab" href="#challenge" role="tab" aria-controls="challenge" aria-selected="false">challenge</a>
-  </li>
-</ul>
-
-<div class="tab-content" id="myTabContent">
-	<div class="tab-pane fade show active user_hobby_index" id="hobby" role="tabpanel" aria-labelledby="hobby-tab">
-		<% @hobbies.each do |hobby| %>
-			<div class= hobby_box >
-					<%= link_to hobby_path(hobby.id) do %>
-					<div class="hobby_img">
-						<!-- 写真がなければ表示しない -->
-						<% if hobby.images. == [] %>
-							<div class="bx-wrapper">
-								<img src="../../assets/hobby_no_image.jpeg" class="hobby_img_index">
-							</div>
-						<% else %>
-						<!-- 写真が一枚ならスライドショーをさせない -->
-							<% if hobby.images.length == 1 %>
-								<div class="bx-wrapper user_hobby_img">
-							<% else %>
-								<div class="slider_index user_hobby_img">
-							<% end %>
-									<% hobby.images.each do |i| %>
-										<%= image_tag i.to_s, class: "hobby_img_index" %>
-									<% end %>
-								</div>
-						<% end %>
-						<div class="user_hobby_title"><%= hobby.title %></div>
-					</div><br>
-				<% end %>
-			</div>
-	<% end %>
-	</div>
-
-	<div class="tab-pane fade" id="challenge" role="tabpanel">
-		<% @user.challenges.each do |challenge| %>
-			<div class= hobby_box >
-					<%= link_to hobby_path(challenge.hobby_id) do %>
-					<div class="hobby_img">
-						<!-- 写真がなければ表示しない -->
-						<% if challenge.hobby.images. == [] %>
-							<div class="bx-wrapper">
-								<img src="../../assets/hobby_no_image.jpeg" class="hobby_img_index">
-							</div>
-						<% else %>
-						<!-- 写真が一枚ならスライドショーをさせない -->
-							<% if challenge.hobby.images.length == 1 %>
-								<div class="bx-wrapper user_hobby_img">
-							<% else %>
-								<div class="slider_index user_hobby_img">
-							<% end %>
-									<% challenge.hobby.images.each do |i| %>
-										<%= image_tag i.to_s, class: "hobby_img_index" %>
-									<% end %>
-								</div>
-						<% end %>
-						<div class="user_hobby_title"><%= challenge.hobby.title %>
-						</div>
-					</div><br>
-				<% end %>
-
-				<%= form_for challenge, url: level_path(challenge.id), remote: true do |f| %>
-					<%= f.submit 'チャレンジした！' %>
-				<% end %>
-				<p id="challenge_times_<%= challenge.id %>"><%= challenge.times %> 回</p>
-				<!-- ボタンを押すとフォームが出現 -->
-				<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modal<%= challenge.id %>">
-				  カレンダーに登録する
-				</button>
-				<div class="modal fade" id="modal<%= challenge.id %>" tabindex="-1"
-				      role="dialog" aria-labelledby="label1" aria-hidden="true">
-				  <div class="modal-dialog modal-dialog-centered" role="document">
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <h5 class="modal-title" id="label1">日時登録</h5>
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				          <span aria-hidden="true">&times;</span>
-				        </button>
-				      </div>
-				      <div class="modal-body">
-				        <%= form_for @event, remote: true do |f| %>
-
-				         <!-- カレンダー登録後、モーダルを閉じるために使用する -->
-				          <%= hidden_field_tag :challenge, challenge.id %>
-
-						  <%= f.hidden_field :title, value: challenge.hobby.title %>
-						  	<div class="date_time">
-							  <label class="control-label" for="">開始日</label>
-							  <%= f.text_field :start, class: 'form-control datetimepicker-input start', data: {toggle: "datetimepicker", target: ".start"}, autocomplete: 'off' %>
-							</div>
-
-		  					<div class="date_time">
-						  		<label class="control-label" for="">終了日</label>
-						  		<%= f.text_field :end, class: 'form-control datetimepicker-input end', data: {toggle: "datetimepicker", target: ".end"}, autocomplete: 'off' %>
-							</div>
-				      </div>
-				      <div class="modal-footer">
-				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				        <%= f.submit '登録', class: 'btn btn-primary' %>
-						<% end %>
-				      </div>
-				    </div>
-				  </div>
-				</div>
-			</div>
+		<% if @user.profile_image? %>
+			<%= image_tag @user.profile_image.to_s, class: "profile_image_show round_img" %>
+		<% else %>
+			<img src="../../assets/default.png" id="img_prev_user"><br>
 		<% end %>
-	</div>
-</div>
 
-<script src="https://platform.twitter.com/widgets.js" charset="utf-8">
-</script>
-<script type="text/javascript">
-    $('.event_start').each(function () {
-        $(this).datetimepicker();
-    });
-    $('.event_end').each(function() {
-    	$(this).datetimepicker();
-    });
-</script>
+		<% if @user.nickname == nil %>
+			<h3><%= @user.name %></h3>
+		<% else %>
+			<h3><%= @user.nickname %></h3>
+		<% end %>
+
+		<P id="user_level">レベル.<%= @user.level_id %></P>
+
+		<!-- 次のレベルまで -->
+		<div id="next_level">
+			<%= render 'gauge', percentage: @percentage %>
+		</div>
+
+		<button class="btn"><%= link_to '編集', edit_user_path(@user.id) %>
+		</button>
+	</div>
+
+	<div class="modal fade" id="modal-level-up" tabindex="-1">
+
+
+	    <div class="modal-dialog">
+
+	        <!-- 3.モーダルのコンテンツ -->
+	        <div class="modal-content modal-level">
+	            <!-- 4.モーダルのヘッダ -->
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal">
+	                    <span aria-hidden="true">&times;</span>
+	                </button>
+	                <h4 class="modal-title" id="modal-label">レベルがアップしました！！</h4>
+	            </div>
+	            <!-- 5.モーダルのボディ -->
+	            <div class="modal-body">
+	                ツイッターでレベルアップをつぶやこう！
+	            </div>
+	            <!-- 6.モーダルのフッタ -->
+	            <div class="modal-footer">
+		            <button type="button" class="btn btn-default">
+		            	<a href="https://twitter.com/intent/tweet">
+		            		<i class="fab fa-twitter-square">
+		            			ツイートする
+		            		</i>
+		            	</a>
+		            </button>
+	                <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	<ul class="nav nav-tabs" id="myTab" role="tablist">
+	  <li class="nav-item">
+	    <a class="nav-link active" id="hobby-tab" data-toggle="tab" href="#hobby" role="tab" aria-controls="hobby" aria-selected="true">my hobby</a>
+	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link" id="challenge-tab" data-toggle="tab" href="#challenge" role="tab" aria-controls="challenge" aria-selected="false">challenge</a>
+	  </li>
+	</ul>
+
+	<div class="tab-content" id="myTabContent">
+		<div class="tab-pane fade show active user_hobby_index" id="hobby" role="tabpanel" aria-labelledby="hobby-tab">
+			<% @hobbies.each do |hobby| %>
+				<div class= hobby_box >
+						<%= link_to hobby_path(hobby.id) do %>
+						<div class="hobby_img">
+							<!-- 写真がなければ表示しない -->
+							<% if hobby.images. == [] %>
+								<div class="bx-wrapper">
+									<img src="../../assets/hobby_no_image.jpeg" class="hobby_img_index">
+								</div>
+							<% else %>
+							<!-- 写真が一枚ならスライドショーをさせない -->
+								<% if hobby.images.length == 1 %>
+									<div class="bx-wrapper user_hobby_img">
+								<% else %>
+									<div class="slider_index user_hobby_img">
+								<% end %>
+										<% hobby.images.each do |i| %>
+											<%= image_tag i.to_s, class: "hobby_img_index" %>
+										<% end %>
+									</div>
+							<% end %>
+							<div class="user_hobby_title"><%= hobby.title %></div>
+						</div><br>
+					<% end %>
+				</div>
+		<% end %>
+		</div>
+
+		<div class="tab-pane fade" id="challenge" role="tabpanel">
+			<% @user.challenges.each do |challenge| %>
+				<div class= hobby_box >
+						<%= link_to hobby_path(challenge.hobby_id) do %>
+						<div class="hobby_img">
+							<!-- 写真がなければ表示しない -->
+							<% if challenge.hobby.images. == [] %>
+								<div class="bx-wrapper">
+									<img src="../../assets/hobby_no_image.jpeg" class="hobby_img_index">
+								</div>
+							<% else %>
+							<!-- 写真が一枚ならスライドショーをさせない -->
+								<% if challenge.hobby.images.length == 1 %>
+									<div class="bx-wrapper user_hobby_img">
+								<% else %>
+									<div class="slider_index user_hobby_img">
+								<% end %>
+										<% challenge.hobby.images.each do |i| %>
+											<%= image_tag i.to_s, class: "hobby_img_index" %>
+										<% end %>
+									</div>
+							<% end %>
+							<div class="user_hobby_title"><%= challenge.hobby.title %>
+							</div>
+						</div><br>
+					<% end %>
+
+					<%= form_for challenge, url: level_path(challenge.id), remote: true do |f| %>
+						<%= f.submit 'チャレンジした！' %>
+					<% end %>
+					<p id="challenge_times_<%= challenge.id %>"><%= challenge.times %> 回</p>
+					<!-- ボタンを押すとフォームが出現 -->
+					<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modal<%= challenge.id %>">
+					  カレンダーに登録する
+					</button>
+					<div class="modal fade" id="modal<%= challenge.id %>" tabindex="-1"
+					      role="dialog" aria-labelledby="label1" aria-hidden="true">
+					  <div class="modal-dialog modal-dialog-centered" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="label1">日時登録</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <%= form_for @event, remote: true do |f| %>
+					      <div class="modal-body">
+
+					         <!-- カレンダー登録後、モーダルを閉じるために使用する -->
+					          <%= hidden_field_tag :challenge, challenge.id %>
+
+							  <%= f.hidden_field :title, value: challenge.hobby.title %>
+							  	<div class="date_time">
+								  <label class="control-label" for="">開始日</label>
+								  <%= f.text_field :start, class: 'form-control datetimepicker-input start', data: {toggle: "datetimepicker", target: ".start"}, autocomplete: 'off' %>
+								</div>
+
+			  					<div class="date_time">
+							  		<label class="control-label" for="">終了日</label>
+							  		<%= f.text_field :end, class: 'form-control datetimepicker-input end', data: {toggle: "datetimepicker", target: ".end"}, autocomplete: 'off' %>
+								</div>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					        <%= f.submit '登録', class: 'btn btn-primary' %>
+							<% end %>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+				</div>
+			<% end %>
+		</div>
+	</div>
+
+<!-- 　ツイート用 -->
+	<script src="https://platform.twitter.com/widgets.js" charset="utf-8">
+	</script>
+
+<!-- カレンダー登録時、カレンダーで日時を選べる -->
+	<script type="text/javascript">
+	    $('.event_start').each(function () {
+	        $(this).datetimepicker();
+	    });
+	    $('.event_end').each(function() {
+	    	$(this).datetimepicker();
+	    });
+	</script>
+
+<!-- スイートアラーム -->
+	<script src = "https://cdn.jsdelivr.net/npm/sweetalert2@9">
+    </script >
+    <script src="sweetalert2/dist/sweetalert2.all.min.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill9/dist/polyfill.js">
+    </script>

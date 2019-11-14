@@ -16,7 +16,6 @@
     <header>
       <ul>
         <% if user_signed_in? %>
-        <div id="current_events" data-event-id="<%= current_user.events.to_json %>"></div>
           <% if current_user.nickname? %>
             <li><%= link_to current_user.nickname, user_path(current_user.id) %></li>
           <% else %>
@@ -26,7 +25,7 @@
           <li><%= link_to "趣味一覧へ", hobbies_path %>
           </li>
           <li>
-            <div data-toggle="modal" data-target="#modal-calendar">
+            <div id="calendar-modal" data-toggle="modal" data-target="#modal-calendar">
                 カレンダー
             </div>
           </li>
@@ -45,6 +44,7 @@
                     <div id="calendar"></div>
                   </div>
                   <div class="modal-footer">
+                    <%= link_to '編集', events_path, class: "btn btn-success" %>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   </div>
                 </div>

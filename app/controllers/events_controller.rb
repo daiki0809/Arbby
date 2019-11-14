@@ -6,7 +6,19 @@ class EventsController < ApplicationController
 		event.save
 	end
 
+	def index
+		some_date = Time.now
+		@events = current_user.events.where("start >= :date", date: some_date.tomorrow.beginning_of_day)
+	end
+
+	def update
+	end
+
 	def destroy
+	end
+
+	def catch
+        render :json => current_user.events.to_json
 	end
 
 	private
