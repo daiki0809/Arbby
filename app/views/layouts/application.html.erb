@@ -36,6 +36,8 @@
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content modal-my-calendar">
                   <div class="modal-header">
+                    <button class="btn btn-danger" id="event-delete_all_btn"> 過去のイベントを削除する
+                    </button>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -62,5 +64,14 @@
       </ul>
     </header>
     <%= yield %>
+
+
+       <!-- スイートアラーム -->
+    <script src = "https://cdn.jsdelivr.net/npm/sweetalert2@9">
+    </script >
+    <script src="sweetalert2/dist/sweetalert2.all.min.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill9/dist/polyfill.js">
+    </script>
   </body>
 </html>

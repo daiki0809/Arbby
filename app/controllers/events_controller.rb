@@ -8,13 +8,26 @@ class EventsController < ApplicationController
 
 	def index
 		some_date = Time.now
-		@events = current_user.events.where("start >= :date", date: some_date.tomorrow.beginning_of_day)
+		@events = current_user.events.where("start >= :date", date: some_date.beginning_of_day)
 	end
 
 	def update
+		event = Event.find(params[:id])
+		event.update(event_params)
+		redirect_to events_path
 	end
 
 	def destroy
+		event = Event.find(params[:id])
+		event.destroy
+		some_date = Time.now
+		@events = current_user.events.where("start >= :date", date: some_date.tomorrow.beginning_of_day)
+	end
+
+	def delete_all
+		some_date = Time.now
+		events = current_user.events.where("start <= :date", date: some_date.beginning_of_day)
+		events.delete_all
 	end
 
 	def catch
