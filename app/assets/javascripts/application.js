@@ -115,3 +115,24 @@ jQuery(document).on('turbolinks:load', function(){
   });
 });
 
+jQuery(document).on('turbolinks:load', function(){
+  $("#event-delete_all_btn").click(function(){
+  Swal.fire({
+    title: '本当に削除しますか？',
+    text: "一度削除すると、イベントは戻せません",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'OK'
+  }).then((result) => {
+    if (result.value) {
+      $.ajax({
+        url: '/events/delete_all',
+        type: 'delete',
+      });
+    }
+  });
+});
+});
+

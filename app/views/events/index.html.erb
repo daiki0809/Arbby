@@ -1,10 +1,41 @@
-<%= @events.each do |event| %>
-	<div>
-		<%= event.title %>
-		<%= event.start %>
-		<%= event.end %>
-	</div><br>
-<% end %>
+<table class="table">
+	<thead>
+		<tr>
+			<th>イベント名</th>
+			<th>開始日時</th>
+			<th>終了日時</th>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+	<span id= "events-index">
+		<% @events.each do |event| %>
+	</span>
+		<tr>
+			<%= form_for event do |f| %>
+				<td><%= f.text_field :title %></td>
+				<td><%= f.text_field :start, class: 'form-control datetimepicker-input event_start', data: {toggle: "datetimepicker", target: ".event_start"}, autocomplete: 'off' %>
+				</td>
+				<td><%= f.text_field :end, class: 'form-control datetimepicker-input event_end', data: {toggle: "datetimepicker", target: ".event_end"}, autocomplete: 'off' %>
+				</td>
+				<td><%= link_to '更新', event_path(event.id), method: :patch, class: "btn btn-outline-primary" %>
+				</td>
+			<% end %>
+				<td><%= link_to '削除', event_path(event.id), method: :delete, class: "btn btn-outline-danger", remote: true %>
+				</td>
+		</tr>
+		<% end %>
+</table>
 
+
+<!-- カレンダー登録時、カレンダーで日時を選べる -->
+	<script type="text/javascript">
+	    $('.event_start').each(function () {
+	        $(this).datetimepicker();
+	    });
+	    $('.event_end').each(function() {
+	    	$(this).datetimepicker();
+	    });
+	</script>
 
 
