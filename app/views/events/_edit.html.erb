@@ -1,0 +1,62 @@
+	<table class="table">
+		<thead>
+			<th>イベント名</th>
+			<th>開始日時</th>
+			<th></th>
+			<th></th>
+		</thead>
+		<% events.each do |event| %>
+			<tr>
+				<td><%= event.title %></td>
+				<td>
+						<%= event.start.strftime("%Y年%m月%d日　%H時%M分 〜") %>
+				</td>
+				<td>
+					<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modal<%= event.id %>">イベント編集する
+					</button>
+				</td>
+					<td>
+						<%= link_to '削除する', event_path(event.id), method: :delete, class: 'btn btn-outline-danger', remote: true %>
+					</td>
+			</tr>
+			<tr>
+				<td>
+					<div class="modal fade" id="modal<%= event.id %>" tabindex="-1" role="dialog" aria-labelledby="label1" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="label1">イベント編集</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<%= form_for event, remote: true do |f| %>
+									<div class="modal-body">
+
+									 <!-- カレンダー登録後、モーダルを閉じるために使用する -->
+									<%= f.hidden_field :title, value: event.title %>
+										<div class="date_time">
+											<label class="control-label" for="">開始日
+											</label>
+											<%= f.text_field :start, class: 'form-control start', data: {toggle: "datetimepicker", target: ".start"}, autocomplete: 'off' %>
+										</div>
+
+							  			<div class="date_time">
+											 <label class="control-label" for="">終了日
+											 </label>
+											  <%= f.text_field :end, class: 'form-control end', data: {toggle: "datetimepicker", target: ".end"}, autocomplete: 'off' %>
+										</div>
+									</div>
+									<div class="modal-footer">
+									    <%= f.submit '更新', class: 'btn btn-primary' %>
+									    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+									    </button>
+									</div>
+								<% end %>
+							</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<% end %>
+		</table>

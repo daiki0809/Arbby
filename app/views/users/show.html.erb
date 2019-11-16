@@ -158,10 +158,11 @@
 								</div>
 					      </div>
 					      <div class="modal-footer">
-					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					        <%= f.submit '登録', class: 'btn btn-primary' %>
-							<% end %>
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+					        </button>
 					      </div>
+					     <% end %>
 					    </div>
 					  </div>
 					</div>
@@ -176,10 +177,10 @@
 
 <!-- カレンダー登録時、カレンダーで日時を選べる -->
 	<script type="text/javascript">
-	    $('.event_start').each(function () {
+	    $('.start').each(function () {
 	        $(this).datetimepicker();
 	    });
-	    $('.event_end').each(function() {
+	    $('.end').each(function() {
 	    	$(this).datetimepicker();
 	    });
 	</script>

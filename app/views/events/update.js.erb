@@ -1,0 +1,7 @@
+$('#modal<%= @event.id %>').modal('hide');
+
+$('.modal-backdrop').hide();
+
+$('#events-index').html("<%= j(render 'events/edit', events: @events) %>");
+
+Swal.fire('更新しました！', '', 'success');
