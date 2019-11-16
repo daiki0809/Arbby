@@ -19,6 +19,11 @@
 <!-- チャレンジボタン -->
 <div id="challenge_button">
 	<%= render 'challenges/button', hobby: @hobby %>
+</div>
+
+<!-- びっくりボタン -->
+<div id="surprise_button">
+	<%= render 'surprises/button', hobby: @hobby %>
 </div><br>
 
 <% if @hobby.user.profile_image? %>
