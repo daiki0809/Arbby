@@ -9,6 +9,7 @@ class User < ApplicationRecord
          has_many :hobbies, dependent: :destroy
          has_many :challenges, dependent: :destroy
          has_many :events, dependent: :destroy
+         has_many :surprises, dependent: :destroy
 
 
          belongs_to :level

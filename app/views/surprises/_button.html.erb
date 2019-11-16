@@ -1,0 +1,11 @@
+<% if hobby.surprise_by?(current_user) %>
+	<%= link_to hobby_surprises_path(hobby.id), method: :delete, remote: true do %>
+		<i id="surprise_icon" class="far fa-surprise fa-3x surprise_icon"></i>
+	<% end %>
+	<%= hobby.surprises.count %> びっくり
+<% else %>
+	<%= link_to hobby_surprises_path(hobby.id), method: :post, remote: true do %>
+		<i id="surprise_icon" class="far fa-surprise fa-3x"></i>
+	<% end %>
+	<%= hobby.surprises.count %> びっくり
+<% end %>

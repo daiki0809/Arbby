@@ -63,39 +63,44 @@
 	  <li class="nav-item">
 	    <a class="nav-link" id="challenge-tab" data-toggle="tab" href="#challenge" role="tab" aria-controls="challenge" aria-selected="false">challenge</a>
 	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link" id="surprise-tab" data-toggle="tab" href="#surprise" role="tab" aria-controls="surprise" aria-selected="false">surprise</a>
+	  </li>
 	</ul>
 
+<!-- ユーザ投稿一覧 -->
 	<div class="tab-content" id="myTabContent">
 		<div class="tab-pane fade show active user_hobby_index" id="hobby" role="tabpanel" aria-labelledby="hobby-tab">
 			<% @hobbies.each do |hobby| %>
 				<div class= hobby_box >
-						<%= link_to hobby_path(hobby.id) do %>
-						<div class="hobby_img">
+					<%= link_to hobby_path(hobby.id) do %>
+					<div class="hobby_img">
 							<!-- 写真がなければ表示しない -->
-							<% if hobby.images. == [] %>
-								<div class="bx-wrapper">
-									<img src="../../assets/hobby_no_image.jpeg" class="hobby_img_index">
-								</div>
+						<% if hobby.images. == [] %>
+							<div class="bx-wrapper">
+								<img src="../../assets/hobby_no_image.jpeg" class="hobby_img_index">
+							</div>
+						<% else %>
+						<!-- 写真が一枚ならスライドショーをさせない -->
+							<% if hobby.images.length == 1 %>
+								<div class="bx-wrapper user_hobby_img">
 							<% else %>
-							<!-- 写真が一枚ならスライドショーをさせない -->
-								<% if hobby.images.length == 1 %>
-									<div class="bx-wrapper user_hobby_img">
-								<% else %>
-									<div class="slider_index user_hobby_img">
-								<% end %>
-										<% hobby.images.each do |i| %>
-											<%= image_tag i.to_s, class: "hobby_img_index" %>
-										<% end %>
-									</div>
+								<div class="slider_index user_hobby_img">
 							<% end %>
-							<div class="user_hobby_title"><%= hobby.title %></div>
-						</div><br>
-					<% end %>
+									<% hobby.images.each do |i| %>
+										<%= image_tag i.to_s, class: "hobby_img_index" %>
+									<% end %>
+								</div>
+						<% end %>
+						<div class="user_hobby_title"><%= hobby.title %></div>
+					</div><br>
+				<% end %>
 				</div>
 		<% end %>
 		</div>
 
-		<div class="tab-pane fade" id="challenge" role="tabpanel">
+<!-- チャレンジ一覧 -->
+		<div class="tab-pane fade" id="challenge">
 			<% @user.challenges.each do |challenge| %>
 				<div class= hobby_box >
 						<%= link_to hobby_path(challenge.hobby_id) do %>
@@ -168,6 +173,36 @@
 					</div>
 				</div>
 			<% end %>
+		</div>
+
+<!-- びっくり一覧 -->
+		<div class="tab-pane fade" id="surprise">
+			<% @user.surprises.each do |surprise| %>
+				<div class= hobby_box >
+						<%= link_to hobby_path(surprise.hobby_id) do %>
+						<div class="hobby_img">
+							<!-- 写真がなければ表示しない -->
+							<% if surprise.hobby.images. == [] %>
+								<div class="bx-wrapper">
+									<img src="../../assets/hobby_no_image.jpeg" class="hobby_img_index">
+								</div>
+							<% else %>
+							<!-- 写真が一枚ならスライドショーをさせない -->
+								<% if surprise.hobby.images.length == 1 %>
+									<div class="bx-wrapper user_hobby_img">
+								<% else %>
+									<div class="slider_index user_hobby_img">
+								<% end %>
+										<% surprise.hobby.images.each do |i| %>
+											<%= image_tag i.to_s, class: "hobby_img_index" %>
+										<% end %>
+									</div>
+							<% end %>
+							<div class="user_hobby_title"><%= surprise.hobby.title %></div>
+						</div><br>
+					<% end %>
+				</div>
+		<% end %>
 		</div>
 	</div>
 
