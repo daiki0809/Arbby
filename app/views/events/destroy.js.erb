@@ -1,1 +1,3 @@
-$('#events-index').html('<% @events.each do |event| %>');
+$('#events-index').html("<%= j(render 'events/edit', events: @events) %>");
+
+$('#delete-ok').html("削除しました")

@@ -119,8 +119,7 @@ jQuery(document).on('turbolinks:load', function(){
   $("#event-delete_all_btn").click(function(){
   Swal.fire({
     title: '本当に削除しますか？',
-    text: "一度削除すると、イベントは戻せません",
-    type: 'warning',
+    text: '一度削除すると、イベントは戻せません',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
