@@ -17,7 +17,9 @@ class HobbiesController < ApplicationController
   end
 
   def index
-    @hobbies = Hobby.all
+     # 検索機能
+    @q = Hobby.ransack(params[:q])
+    @hobbies = @q.result(distinct: true)
   end
 
   def show

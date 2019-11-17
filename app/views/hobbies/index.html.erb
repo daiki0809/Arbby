@@ -1,5 +1,17 @@
 <h1>趣味一覧</h1>
 
+<!-- 検索フォーム -->
+<%= search_form_for @q do |f| %>
+	<%= f.label :genre, "ジャンル" %>
+	<%= f.select :genre_id_eq, options_for_select([["運動系", 1], ["頭脳系", 2], ["作る系", 3], ["学ぶ系", 4], ["自然系", 5], ["その他", 6]]), include_blank: true %>
+
+	<%= f.label :budget, "予算" %>
+	<%= f.number_field :budget_gteq %>円〜
+	<%= f.number_field :budget_lt %>円未満
+
+	<%= f.submit "検索" %>
+<% end %>
+
 <% @hobbies.each do |hobby| %>
 		<div class= hobby_box >
 			<% if hobby.user.profile_image? %>
