@@ -1,4 +1,7 @@
 class Hobby < ApplicationRecord
+
+	default_scope -> { order(created_at: :desc) }
+
 	mount_uploaders :images, ImageUploader
 
 	has_many :challenges, dependent: :destroy
@@ -17,8 +20,14 @@ class Hobby < ApplicationRecord
 		validates :hobby_point
 	end
 
+# ランキング機能
 	ransacker :challenges_count do
 		query = '(SELECT COUNT(challenges.hobby_id) FROM challenges where challenges.hobby_id = hobbies.id GROUP BY challenges.hobby_id)'
+		Arel.sql(query)
+	end
+
+	ransacker :surprises_count do
+		query = '(SELECT COUNT(surprises.hobby_id) FROM surprises where surprises.hobby_id = hobbies.id GROUP BY surprises.hobby_id)'
 		Arel.sql(query)
 	end
 
