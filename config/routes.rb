@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
-  
+
   get 'users/show'
   root :to => 'homes#top'
-  
+
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  devise_for :admins
 
   get 'homes/about'
   get 'homes/check'
