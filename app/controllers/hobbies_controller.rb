@@ -29,7 +29,6 @@ class HobbiesController < ApplicationController
   def show
     @hobby = Hobby.find(params[:id])
     @comment = HobbyComment.new
-    @reply_new = HobbyComment.new
     if @hobby.user == current_user
       @comments = @hobby.hobby_comments.where(reply_comment: nil)
       @replies = @hobby.hobby_comments.where.not(reply_comment: nil)

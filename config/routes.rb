@@ -1,11 +1,22 @@
 Rails.application.routes.draw do
 
+  get 'admin_hobbies/index'
+  get 'admin_hobbies/show'
   get 'users/show'
   root :to => 'homes#top'
 
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, controllers: {
+  omniauth_callbacks: 'users/omniauth_callbacks',
+  sessions:      'users/sessions',
+  passwords:     'users/passwords',
+  registrations: 'users/registrations'
+  }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  devise_for :admins
+  devise_for :admins, controllers: {
+  sessions:      'admins/sessions',
+  passwords:     'admins/passwords',
+  registrations: 'admins/registrations'
+  }
 
   get 'homes/about'
   get 'homes/check'
@@ -23,6 +34,14 @@ Rails.application.routes.draw do
   end
 
   resources :levels, only: [:update]
+
+  resources :admin_users, only: [:index, :show, :destroy]
+
+  resources :admin_hobbies, only: [:index, :show, :destroy] do
+    collection do
+          match 'search' => 'admin_hobbies#search', via: [:get, :post]
+    end
+  end
 
   get 'events/catch'
   delete 'events/delete_all'

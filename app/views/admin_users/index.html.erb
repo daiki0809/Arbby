@@ -1,0 +1,17 @@
+<h1>ユーザ一覧</h1>
+
+<% @users.each do |user| %>
+	<%= link_to admin_user_path(user.id) do %>
+		<div>
+			<%= image_tag user.profile_image.to_s, class: "round_img admin_index_profile_img" %><br>
+
+			<% if user.nickname == nil %>
+				<%= user.name %>
+			<% else %>
+				<%= user.nickname %>
+			<% end %>
+			<br>
+			レベル. <%= user.level_id %>
+		</div>
+	<% end %>
+<% end %>
