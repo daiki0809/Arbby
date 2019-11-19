@@ -16,6 +16,9 @@ Rails.application.routes.draw do
         resource :challenges, only: [:create, :destroy]
         resource :surprises, only: [:create, :destroy]
         resource :hobby_comments, only: [:create, :destroy, :update]
+        collection do
+          match 'search' => 'hobbies#search', via: [:get, :post]
+        end
   end
 
   resources :levels, only: [:update]

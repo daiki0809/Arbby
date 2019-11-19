@@ -24,7 +24,7 @@
 					<% end %>
 				</td>
 				<td>
-					<% if replys.where(reply_comment: comment.id) != [] %>
+					<% if replies.where(reply_comment: comment.id) != [] %>
 						<button type="button" class="btn btn-outline-primary">
 	   					返信を表示
 	  					</button>
@@ -38,7 +38,7 @@
 					</button>
 				</td>
 				<td>
-					<% if replys.where(reply_comment: comment.id) != [] %>
+					<% if replies.where(reply_comment: comment.id) != [] %>
 						<button type="button" class="btn btn-outline-primary">
 	   					返信を表示
 	  					</button>
@@ -82,7 +82,7 @@
 			</td>
 		</tr>
 
-	    <% replys.where(reply_comment: comment.id).each do |reply| %>
+	    <% replies.where(reply_comment: comment.id).each do |reply| %>
 	    	<tr>
 	    		<td class="hiddenRow">
 	    			<div class="accordian-body collapse reply_comment<%= comment.id %>">

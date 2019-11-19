@@ -5,7 +5,8 @@ class HobbyCommentsController < ApplicationController
 		hobby_comment = current_user.hobby_comments.new(hobby_comment_params)
 		hobby_comment.hobby_id = @hobby.id
 		if params[:reply] == "true"
-			hobby_comment.reply_comment = params[:comment_id]
+			@comment_id = params[:comment_id]
+			hobby_comment.reply_comment = @comment_id
 		end
 		if hobby_comment.save
 		else
@@ -18,6 +19,8 @@ class HobbyCommentsController < ApplicationController
 	def destroy
 		comment = HobbyComment.find(params[:hobby_id])
 		@hobby = comment.hobby
+		replies = HobbyComment.where(reply_comment: comment.id)
+		replies.delete_all
 		comment.destroy
 		@comment = HobbyComment.new
 		comments_get(@hobby)
@@ -46,12 +49,12 @@ class HobbyCommentsController < ApplicationController
 	def comments_get(hobby)
 		if hobby.user == current_user
 	      @comments = hobby.hobby_comments.where(reply_comment: nil)
-	      @replys = hobby.hobby_comments.where.not(reply_comment: nil)
+	      @replies = hobby.hobby_comments.where.not(reply_comment: nil)
 	    else
 	      no_private_comments = hobby.hobby_comments.where(private: false).where(reply_comment: nil)
 	      my_private_comments = hobby.hobby_comments.where(private: true).where(user_id: current_user.id)
 	      @comments = no_private_comments + my_private_comments
-	      @replys = hobby.hobby_comments.where.not(reply_comment: nil)
+	      @replies = hobby.hobby_comments.where.not(reply_comment: nil)
     	end
 	end
 end
