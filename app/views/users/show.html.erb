@@ -1,10 +1,6 @@
 	<div class="user_info">
 
-		<% if @user.profile_image? %>
-			<%= image_tag @user.profile_image.to_s, class: "profile_image_show round_img" %>
-		<% else %>
-			<img src="../../assets/default.png" id="img_prev_user"><br>
-		<% end %>
+		<%= image_tag @user.profile_image.to_s, class: "profile_image_show round_img" %>
 
 		<% if @user.nickname == nil %>
 			<h3><%= @user.name %></h3>

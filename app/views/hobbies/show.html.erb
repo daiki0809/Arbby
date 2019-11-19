@@ -26,11 +26,7 @@
 	<%= render 'surprises/button', hobby: @hobby %>
 </div><br>
 
-<% if @hobby.user.profile_image? %>
-	<%= image_tag @hobby.user.profile_image.to_s,  class: "round_img profile_image_show" %>
-<% else %>
-	<img src="../../assets/default.png" class="round_img profile_image_show">
-<% end %>
+<%= image_tag @hobby.user.profile_image.to_s,  class: "round_img profile_image_show" %>
 
 <% if @hobby.user.nickname == nil %>
 	<%= @hobby.user.name %>
@@ -48,3 +44,14 @@
 		<%= link_to '削除する', hobby_path, method: :delete %>
 	</p>
 <% end %>
+
+<!-- コメント -->
+<%= form_for [@hobby, @comment], remote: true do |f| %>
+	<%= f.text_area :comment, id: "comment_body" %>
+	<%= f.submit 'コメントする' %>
+<% end %>
+
+<!-- コメント一覧表示 -->
+<div id="hobby_comments_box">
+	<%= render 'hobby_comments/comments', comments: @comments, replys: @replys %>
+</div>

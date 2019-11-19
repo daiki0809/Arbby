@@ -2,11 +2,7 @@
 	<%= f.file_field :profile_image, id: "profile_image" %><br>
 	<div id="img_prev_user_box">
 <!-- 画像をプレビュ -->
-		<% if @user.profile_image? %>
-			<%= image_tag @user.profile_image.to_s, id: "img_prev_user", class: "round_img" %><br>
-		<% else %>
-			<img src="../../assets/default.png" id="img_prev_user" class="round_img"><br>
-		<% end %>
+		<%= image_tag @user.profile_image.to_s, id: "img_prev_user", class: "round_img" %><br>
 	</div>
 
 	<%= f.text_field :name %><br>

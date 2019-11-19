@@ -11,9 +11,11 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :edit, :update, :destroy]
 
+  post 'hobby_comment/reply/:id', to: 'hobby_comments#reply', as: 'hobby_comments_reply'
   resources :hobbies, only: [:new, :index, :show, :edit, :create, :update, :destroy] do
         resource :challenges, only: [:create, :destroy]
         resource :surprises, only: [:create, :destroy]
+        resource :hobby_comments, only: [:create, :destroy, :update]
   end
 
   resources :levels, only: [:update]

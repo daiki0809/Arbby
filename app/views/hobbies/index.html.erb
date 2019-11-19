@@ -14,11 +14,7 @@
 
 <% @hobbies.each do |hobby| %>
 		<div class= hobby_box >
-			<% if hobby.user.profile_image? %>
-				<%= image_tag hobby.user.profile_image.to_s, class: "round_img hobby_index_profile_img" %>
-			<% else %>
-				<img src="../../assets/default.png" class="round_img hobby_index_profile_img">
-			<% end %>
+			<%= image_tag hobby.user.profile_image.to_s, class: "round_img hobby_index_profile_img" %>
 
 			<% if hobby.user.nickname == nil %>
 				<%= hobby.user.name %>

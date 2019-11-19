@@ -24,6 +24,17 @@ class HobbiesController < ApplicationController
 
   def show
     @hobby = Hobby.find(params[:id])
+    @comment = HobbyComment.new
+    @reply_new = HobbyComment.new
+    if @hobby.user == current_user
+      @comments = @hobby.hobby_comments.where(reply_comment: nil)
+      @replys = @hobby.hobby_comments.where.not(reply_comment: nil)
+    else
+      no_private_comments = @hobby.hobby_comments.where(private: false).where(reply_comment: nil)
+      my_private_comments = @hobby.hobby_comments.where(private: true).where(user_id: current_user.id)
+      @comments = no_private_comments + my_private_comments
+      @replys = @hobby.hobby_comments.where.not(reply_comment: nil)
+    end
   end
 
   def edit

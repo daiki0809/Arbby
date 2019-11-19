@@ -3,6 +3,7 @@ class Hobby < ApplicationRecord
 
 	has_many :challenges, dependent: :destroy
 	has_many :surprises, dependent: :destroy
+	has_many :hobby_comments, dependent: :destroy
 
 	belongs_to :genre
 	belongs_to :user

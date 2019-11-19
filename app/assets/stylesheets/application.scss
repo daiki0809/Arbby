@@ -85,6 +85,11 @@
 	height: 100px;
 }
 
+.reply_image {
+	width: 50px;
+	height: 50px;
+}
+
 .hobby_index_profile_img {
 	width: 50px;
 	height: 50px;
@@ -127,4 +132,8 @@
 
 .fc-title {
 	color: white;
+}
+
+.hiddenRow {
+	padding: 0 4px !important;
 }

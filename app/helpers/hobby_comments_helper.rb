@@ -1,0 +1,2 @@
+module HobbyCommentsHelper
+end
