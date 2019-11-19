@@ -17,6 +17,11 @@ class Hobby < ApplicationRecord
 		validates :hobby_point
 	end
 
+	ransacker :challenges_count do
+		query = '(SELECT COUNT(challenges.hobby_id) FROM challenges where challenges.hobby_id = hobbies.id GROUP BY challenges.hobby_id)'
+		Arel.sql(query)
+	end
+
 # ユーザがチャレンジをすでに押しているか？
 	def challenge_by?(user)
 		challenges.where(user_id: user.id).exists?

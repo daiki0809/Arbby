@@ -12,6 +12,8 @@
 	<%= f.submit "検索" %>
 <% end %>
 
+<!-- 並び替え -->
+
 <% @hobbies.each do |hobby| %>
 		<div class= hobby_box >
 			<%= image_tag hobby.user.profile_image.to_s, class: "round_img hobby_index_profile_img" %>
