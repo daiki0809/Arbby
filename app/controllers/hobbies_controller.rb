@@ -17,6 +17,10 @@ class HobbiesController < ApplicationController
   end
 
   def index
+    if params[:q].present?
+      @search = "true"
+      @genre_id = params[:q][:genre_id_eq]
+    end
      # 検索機能
     @q = Hobby.ransack(params[:q])
     @hobbies = @q.result(distinct: true)
@@ -59,9 +63,20 @@ class HobbiesController < ApplicationController
     redirect_to hobbies_path
   end
 
+  def search
+    @q = Hobby.ransack(search_params)
+    @hobbies = @q.result
+    @sort = "true"
+    render action: :index
+  end
+
   private
 
   	def hobby_params
   		params.require(:hobby).permit(:title, :body, :user_id, :genre_id, :budget, :hobby_point, {images: []})
   	end
+
+    def search_params
+      params.require(:q).permit(:sorts)
+    end
 end
