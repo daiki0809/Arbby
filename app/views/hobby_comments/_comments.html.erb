@@ -1,0 +1,109 @@
+<table class="table table-condensed" style="border-collapse:collapse;">
+	<% comments.each do |comment| %>
+		<tr data-toggle="collapse" data-target=".reply_comment<%= comment.id %>" class="accordion-toggle">
+			<td><%= image_tag comment.user.profile_image.to_s, class: "round_img profile_image_show" %>
+
+			<% if comment.user.nickname? %>
+				<%= comment.user.nickname %>
+			<% else %>
+				<%= comment.user.name %>
+			<% end %>
+			</td>
+			<td><%= comment.comment %></td>
+
+			<% if comment.user == current_user %>
+				<td>
+					<%= link_to '削除する', hobby_hobby_comments_path(comment.id), method: :delete, class: 'btn btn-outline-danger', remote: true
+					%>
+					<% if comment.private == false %>
+						<%= link_to '非公開にする', hobby_hobby_comments_path(comment.id), method: :patch, class: 'btn btn-outline-dark', remote: true
+						 %>
+					<% else %>
+						<%= link_to '公開する', hobby_hobby_comments_path(comment.id), method: :patch, class: 'btn btn-outline-info', remote: true
+						 %>
+					<% end %>
+				</td>
+				<td>
+					<% if replys.where(reply_comment: comment.id) != [] %>
+						<button type="button" class="btn btn-outline-primary">
+	   					返信を表示
+	  					</button>
+	  				<% end %>
+				</td>
+			<% else %>
+				<td>
+					<!-- 返信フォームを表示 -->
+					<button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modal_comment_<%= comment.id %>">
+					  返信する
+					</button>
+				</td>
+				<td>
+					<% if replys.where(reply_comment: comment.id) != [] %>
+						<button type="button" class="btn btn-outline-primary">
+	   					返信を表示
+	  					</button>
+	  				<% end %>
+  				</td>
+			<% end %>
+		</tr>
+
+		<tr>
+			<td class="hiddenRow">
+				<!-- 返信フォーム -->
+				<div class="modal fade" id="modal_comment_<%= comment.id %>" tabindex="-1" role="dialog" aria-labelledby="label1" aria-hidden="true">
+				  <div class="modal-dialog modal-dialog-centered" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h6 class="modal-title" id="label1">
+				        	<%= comment.comment %>
+				        </h6>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;
+				          </span>
+				        </button>
+				      </div>
+				      <%= form_for [@hobby, @comment], remote: true do |c| %>
+					      <div class="modal-body">
+					      	<%= hidden_field_tag :reply, "true" %>
+
+					      	<%= hidden_field_tag :comment_id, comment.id %>
+
+					      	<%= c.label :comment, "返信内容", class: 'control-label' %>
+					        <%= c.text_area :comment, class: 'form-control' %>
+					      </div>
+					      <div class="modal-footer">
+					      	<%= c.submit '返信する', class: 'btn btn-success' %>
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+					      </div>
+				      <% end %>
+				    </div>
+				  </div>
+				</div>
+			</td>
+		</tr>
+
+	    <% replys.where(reply_comment: comment.id).each do |reply| %>
+	    	<tr>
+	    		<td class="hiddenRow">
+	    			<div class="accordian-body collapse reply_comment<%= comment.id %>">
+	    				<%= image_tag reply.user.profile_image.to_s, class: "round_img reply_image"
+	    				%>
+
+						<% if reply.user.nickname? %>
+								<%= reply.user.nickname %>
+						<% else %>
+								<%= replyuser.name %>
+						<% end %>
+					</div>
+				</td>
+				<td class="hiddenRow">
+					<div class="accordian-body collapse reply_comment<%= comment.id %>">
+						<%= reply.comment %>
+						<i class="fas fa-level-up-alt">
+						</i>
+	    			</div>
+	    		</td>
+			</tr>
+		<% end %>
+	<% end %>
+</table>

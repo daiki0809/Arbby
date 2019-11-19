@@ -15,9 +15,9 @@
 					<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modal<%= event.id %>">イベント編集する
 					</button>
 				</td>
-					<td>
-						<%= link_to '削除する', event_path(event.id), method: :delete, class: 'btn btn-outline-danger', remote: true %>
-					</td>
+				<td>
+					<%= link_to '削除する', event_path(event.id), method: :delete, class: 'btn btn-outline-danger', remote: true %>
+				</td>
 			</tr>
 			<tr>
 				<td>
@@ -58,5 +58,5 @@
 					</div>
 				</td>
 			</tr>
-			<% end %>
+		<% end %>
 		</table>

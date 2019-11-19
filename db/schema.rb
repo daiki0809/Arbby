@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_16_092129) do
+ActiveRecord::Schema.define(version: 2019_11_17_051629) do
 
   create_table "challenges", force: :cascade do |t|
     t.integer "user_id"
@@ -43,6 +43,16 @@ ActiveRecord::Schema.define(version: 2019_11_16_092129) do
     t.text "body"
     t.integer "budget"
     t.integer "hobby_point"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "hobby_comments", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "hobby_id"
+    t.text "comment"
+    t.integer "reply_comment"
+    t.boolean "private", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

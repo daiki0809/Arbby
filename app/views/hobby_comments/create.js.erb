@@ -1,0 +1,11 @@
+$('#hobby_comments_box').html("<%= j(render 'hobby_comments/comments', comments: @comments, replys: @replys) %>");
+
+$('#comment_body').val('');
+
+$('.modal-backdrop').hide();
+
+<% if @alert == true %>
+	Swal.fire('コメントを入力してください！', '', 'error');
+<% else %>
+	Swal.fire('返信しました！', '', 'success');
+<% end %>

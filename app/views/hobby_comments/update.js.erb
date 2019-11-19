@@ -1,0 +1,7 @@
+$('#hobby_comments_box').html("<%= j(render 'hobby_comments/comments', comments: @comments, replys: @replys) %>");
+
+<% if @private == "true" %>
+	Swal.fire('非公開にしました！', 'このコメントは、趣味を投稿したユーザのみに表示されます。', 'success');
+<% else %>
+	Swal.fire('公開しました！', 'このコメントは、全てのユーザに表示されます。', 'success');
+<% end %>
