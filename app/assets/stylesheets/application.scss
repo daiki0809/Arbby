@@ -20,11 +20,73 @@
 @import "bootstrap";
 @import "font-awesome";
 @import "tempusdominus-bootstrap-4.css";
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+JP');
 
  * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+body {
+	font-family: 'Noto Sans JP', sans-serif;
+}
+li {
+	list-style: none;
+}
+
+header {
+	background-color: #CCCCCC;
+	width: 100%;
+}
+
+.arbby-icon {
+	width: 100px;
+	background-image: url(/images/arbby.png);
+	background-size: 180px;
+	background-position: 50% 42%;
+	height: 70px;
+	margin: 0;
+	float: left;
+}
+.header-box {
+	width: 80%;
+	height: 70px;
+	margin: auto;
+}
+
+.header-manu {
+	width: 100px;
+	height: 70px;
+	margin-right: 10px;
+	text-align: center;
+	float: right;
+}
+
+.header-manu:hover {
+	background-color: #AAAAAA;
+	color: white;
+}
+
+header ul {
+	overflow: auto;
+	text-align: right;
+	line-height: 70px;
+}
+
+header li {
+	display: inline;
+	height: 100%;
+}
+
+a {
+	color: #FFFFDD;
 }
 
 .img_prev {
@@ -136,4 +198,232 @@
 
 .hiddenRow {
 	padding: 0 4px !important;
+}
+
+#gacha_hobby {
+	display: none;
+}
+
+#rare {
+	display: none;
+}
+.rare_icon {
+	display: none;
+	float: left;
+}
+
+.fa-star {
+	color: #FFD700;
+	float: left;
+}
+
+.top-title-box {
+	background-image: url(/images/arche.jpg);
+	background-size: cover;
+	background-position: center;
+	height: 500px;
+	position: relative;
+	width: 100%;
+	margin-bottom: 300px;
+}
+
+.top-title-text {
+	position: absolute;
+	bottom: 30px;
+	right: 0;
+	background-color: white;
+}
+#top-img1 {
+	background-image: url(/images/girl.jpg);
+	background-size: cover;
+	background-position: center;
+
+}
+
+#top-img2 {
+	background-image: url(/images/soccer.jpg);
+	background-size: cover;
+	background-position: center;
+
+}
+
+#top-img3 {
+	background-image: url(/images/human.jpg);
+	background-size: cover;
+	background-position: center;
+
+}
+
+.home-text-box {
+	height: 400px;
+	margin-bottom: 150px;
+}
+
+.home-text {
+	background-color: #CCCCCC;
+	line-height: 40px;
+	font-size: 20px;
+}
+
+.text-body-strong{
+	font-size: 22px;
+}
+
+.home-text-body {
+	margin: auto;
+}
+
+.home-sub-title {
+	margin-bottom: 20px;
+}
+
+.top-button {
+	margin-bottom: 40px;
+}
+
+.sign-up-field {
+	background-image: url(/images/town2.jpg);
+	background-size: cover;
+	background-position: center;
+}
+
+.login-field {
+	background-image: url(/images/town1.jpg);
+	background-size: cover;
+	background-position: center;
+}
+
+.sign-box {
+	padding: 22% 0;
+}
+
+.sign-box-mini {
+	background-color:rgba(128,128,128,0.9);
+}
+
+.field {
+	margin-bottom: 20px;
+	color: #FFFFDD;
+}
+
+.actions {
+	margin-bottom: 15px;
+}
+
+#hm-icon{
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  z-index: 10;
+}
+
+.menu-trigger,
+.menu-trigger span {
+  display: inline-block;
+  transition: all .4s;
+  box-sizing: border-box;
+}
+
+.menu-trigger {
+  position: relative;
+  width: 50px;
+  height: 44px;
+}
+
+.menu-trigger span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: #000;
+  border-radius: 4px;
+}
+
+.menu-trigger span:nth-of-type(1) {
+  top: 0;
+}
+
+.menu-trigger span:nth-of-type(2) {
+  top: 20px;
+}
+
+.menu-trigger span:nth-of-type(3) {
+  bottom: 0;
+}
+
+.menu-trigger.active span:nth-of-type(1) {
+  -webkit-transform: translateY(20px) rotate(-45deg);
+  transform: translateY(20px) rotate(-45deg);
+  background-color: #fff;
+}
+
+.menu-trigger.active span:nth-of-type(2) {
+  opacity: 0;
+}
+
+.menu-trigger.active span:nth-of-type(3) {
+  -webkit-transform: translateY(-20px) rotate(45deg);
+  transform: translateY(-20px) rotate(45deg);
+  background-color: #fff;
+}
+
+#sp-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  width: 50%;
+  min-height: 0%;
+  display: none;
+  z-index: 9;
+}
+
+#sp-menu li{
+  text-align: center;
+  margin-bottom: 30px;
+  display: block;
+}
+
+#sp-menu a{
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#sp-menu a:hover {
+	color: #FFCC33;
+}
+
+#calendar-modal:hover {
+	color: #FFCC33;
+	cursor: pointer;
+}
+
+.twitter-login {
+	margin-top: 20px;
+}
+
+.img_prev {
+	margin: 15px 15px 15px 0;
+	border: solid 8px #555555;
+}
+
+.hobby_new-text {
+	margin-bottom: 15px
+}
+
+.hobby-new-field {
+	background-image: url(/images/hobby_new.jpg);
+	background-size: cover;
+	background-position: center;
+	padding: 12%;
+}
+
+.hobby-new-box {
+	background: rgba(255,255,255,0.8);
+}
+
+#hobby_img {
+	margin-top: 15px;
 }
