@@ -56,6 +56,8 @@ jQuery(document).on('turbolinks:load', function(){
 // カレンダー
 jQuery(document).on('turbolinks:load', function(){
   $('#calendar-modal').click(function() {
+    $('.menu-trigger').toggleClass('active');
+    $('#sp-menu').fadeToggle();
     $('#calendar').fullCalendar('destroy');
       var currentEvents = {};
              $.ajaxSetup({ cache: false });
@@ -91,13 +93,14 @@ jQuery(document).on('turbolinks:load', function(){
 
                     views: {
                       month: {
-                          titleFormat: "YYYY年 MMMM",
+                          titleFormat: "YYYY年 MM月",
                       },
                       week: {
+                          titleFormat: "YYYY年　MM月 D日",
                           columnFormat: "dddd",
                       },
                       day: {
-                          titleFormat: "YYYY年　MMMM d日　dddd   ",
+                          titleFormat: "YYYY年　MM月 D日",
                       }
                   },
                      // 月名称
@@ -141,3 +144,13 @@ $('.accordian-body').on('show.bs.collapse', function () {
         .not(this)
         .collapse('toggle')
 })
+
+jQuery(document).on('turbolinks:load', function(){
+  $(function() {
+    $('.menu-trigger').on('click', function() {
+      $(this).toggleClass('active');
+      $('#sp-menu').fadeToggle();
+      return false;
+    });
+   });
+});

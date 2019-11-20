@@ -1,0 +1,62 @@
+<h1>趣味ガチャ</h1>
+
+<div id="gacha">
+	<button class="btn btn-warning btn-block">ガチャる</button>
+
+	<div id="rare">
+		<h3>レア度</h3>
+		<div class="clearfix">
+			<% @rare.times do %>
+				<div class="rare_icon">
+					<i class="fas fa-star fa-3x"></i>
+				</div>
+			<% end %>
+		</div>
+	</div>
+
+	<div id="gacha_hobby">
+		<% if @hobby.images == [] %>
+			<div class="bx-wrapper">
+			<img src="../../assets/hobby_no_image.jpeg" class="hobby_img_show">
+			</div>
+		<% else %>
+			<%= image_tag @hobby.images[0].to_s, class: "hobby_img_show" %>
+		<% end %>
+		<%= @hobby.title %>
+		<%= link_to '詳細画面へ', hobby_path(@hobby.id), class: 'btn btn-secondary'%>
+	</div>
+</div>
+
+<script>
+
+
+
+	var exit_count = 0;
+	var elems_count = 0;
+	function repeat_show(elems$) {
+		elems_count = elems$.length;
+		elems$.eq(exit_count).show('slow', function() {
+			exit_count ++;
+	    	if(exit_count < elems_count) {
+	      		repeat_show(elems$);
+	    	}
+	  	});
+	}
+
+		$("#gacha button").click(function(color) {
+				<% if @rare <= 2 %>
+					var color = "gray";
+				<% elsif @rare <= 4 %>
+					var color = "#CC0000";
+				<% else %>
+					var color = "#D0FF43";
+				<% end %>
+			$(this).hide();
+			$("#gacha_hobby").show('slow', function(){
+				$(this).css('border', `10px solid ${color}`);
+			});
+			$("#rare").show('slow', function(){
+				repeat_show($(".rare_icon"));
+			})
+		});
+</script>

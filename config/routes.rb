@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   }
 
   get 'homes/about'
-  get 'homes/check'
+  get 'homes/gacha'
 
   resources :users, only: [:show, :edit, :update, :destroy]
 

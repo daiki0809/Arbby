@@ -14,60 +14,86 @@
   </head>
   <body>
     <header>
-      <ul>
-        <% if user_signed_in? %>
-          <% if current_user.nickname? %>
-            <li><%= link_to current_user.nickname, user_path(current_user.id) %></li>
-          <% else %>
-            <li><%= link_to current_user.name, user_path(current_user.id) %></li>
-          <% end %>
-
-          <li><%= link_to "趣味一覧へ", hobbies_path %>
-          </li>
-          <li>
-            <div id="calendar-modal" data-toggle="modal" data-target="#modal-calendar">
-                カレンダー
-            </div>
-          </li>
-
-          <!-- モーダルの中身 -->
-            <div class="modal fade" id="modal-calendar" tabindex="-1"
-                  role="dialog" aria-labelledby="label-calendar" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content modal-my-calendar">
-                  <div class="modal-header">
-                    <button class="btn btn-danger" id="event-delete_all_btn"> 過去のイベントを削除する
-                    </button>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <div id="calendar"></div>
-                  </div>
-                  <div class="modal-footer">
-                    <%= link_to '編集', events_path, class: "btn btn-success" %>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  </div>
+      <div class="header-box">
+        <h3 class="arbby-icon"></h3>
+        <nav>
+        <ul>
+          <% if user_signed_in? %>
+            <div id="sp-menu">
+              <li><%= link_to "マイページへ", user_path(current_user.id) %>
+              </li>
+              <li><%= link_to "趣味を投稿",new_hobby_path %>
+              </li>
+              <li><%= link_to "趣味一覧", hobbies_path %>
+              </li>
+              <li>
+                <div id="calendar-modal" data-toggle="modal" data-target="#modal-calendar">
+                    カレンダー
                 </div>
-              </div>
-            </div>
+              </li>
+              <li><%= link_to "趣味ガチャ", homes_gacha_path %>
+              </li>
+              <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+              </li>
+          </div>
 
-          <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-          </li>
-        <% elsif admin_signed_in? %>
-          <li><%= link_to "ユーザ一覧", admin_users_path %></li>
-          <li><%= link_to "投稿一覧", admin_hobbies_path %></li>
-          <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-          </li>
-        <% else %>
-          <li><%= link_to "ログイン", new_user_session_path %>
-          </li>
-          <li><%= link_to "会員登録", new_user_registration_path %>
-          </li>
-        <% end %>
-      </ul>
+            <div id="hm-icon">
+              <a class="menu-trigger" href="#">
+                <span></span>
+                <span></span>
+                <span></span>
+              </a>
+            </div>
+          <% elsif admin_signed_in? %>
+            <li><%= link_to "ユーザ一覧", admin_users_path %></li>
+            <li><%= link_to "投稿一覧", admin_hobbies_path %></li>
+            <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+            </li>
+          <% else %>
+            <%= link_to new_user_registration_path do %>
+              <div class="header-manu">
+                <li>会員登録</li>
+              </div>
+            <% end %>
+            <%= link_to new_user_session_path do %>
+              <div class="header-manu">
+                <li>ログイン</li>
+              </div>
+            <% end %>
+          <% end %>
+        </ul>
+      </nav>
+      </div>
+
     </header>
+
+    <% if user_signed_in? %>
+    <!-- モーダルの中身 -->
+    <div class="modal fade" id="modal-calendar" tabindex="-1"
+            role="dialog" aria-labelledby="label-calendar" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modal-my-calendar">
+          <div class="modal-header">
+            <button class="btn btn-danger" id="event-delete_all_btn"> 過去のイベントを削除する
+            </button>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;
+              </span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="calendar"></div>
+          </div>
+          <div class="modal-footer">
+            <%= link_to '編集', events_path, class: "btn btn-success" %>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+
     <%= yield %>
 
 
