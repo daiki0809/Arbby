@@ -1,7 +1,7 @@
 <table class="table table-condensed" style="border-collapse:collapse;">
 	<% comments.each do |comment| %>
 		<tr data-toggle="collapse" data-target=".reply_comment<%= comment.id %>" class="accordion-toggle">
-			<td><%= image_tag comment.user.profile_image.to_s, class: "round_img profile_image_show" %>
+			<td style="width:20%"><%= image_tag comment.user.profile_image.to_s, class: "round_img profile_image_show" %>
 
 			<% if comment.user.nickname? %>
 				<%= comment.user.nickname %>
@@ -9,21 +9,22 @@
 				<%= comment.user.name %>
 			<% end %>
 			</td>
-			<td><%= comment.comment %></td>
+			<td style="width:50%"><%= comment.comment %>
+			</td>
 
 			<% if comment.user == current_user %>
-				<td>
-					<%= link_to '削除する', hobby_hobby_comments_path(comment.id), method: :delete, class: 'btn btn-outline-danger', remote: true
+				<td style="width:20%">
+					<%= link_to '削除する', hobby_hobby_comments_path(comment.id), method: :delete, class: 'btn btn-outline-danger col-10', remote: true
 					%>
 					<% if comment.private == false %>
-						<%= link_to '非公開にする', hobby_hobby_comments_path(comment.id), method: :patch, class: 'btn btn-outline-dark', remote: true
+						<%= link_to '非公開にする', hobby_hobby_comments_path(comment.id), method: :patch, class: 'btn btn-outline-dark col-10', remote: true
 						 %>
 					<% else %>
-						<%= link_to '公開する', hobby_hobby_comments_path(comment.id), method: :patch, class: 'btn btn-outline-info', remote: true
+						<%= link_to '公開する', hobby_hobby_comments_path(comment.id), method: :patch, class: 'btn btn-outline-info col-10', remote: true
 						 %>
 					<% end %>
 				</td>
-				<td>
+				<td style="width:10%">
 					<% if replies.where(reply_comment: comment.id) != [] %>
 						<button type="button" class="btn btn-outline-primary">
 	   					返信を表示
@@ -31,7 +32,7 @@
 	  				<% end %>
 				</td>
 			<% else %>
-				<td>
+				<td style="width:20%">
 					<!-- 返信フォームを表示 -->
 					<button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modal_comment_<%= comment.id %>">
 					  返信する
@@ -55,7 +56,7 @@
 				    <div class="modal-content">
 				      <div class="modal-header">
 				        <h6 class="modal-title" id="label1">
-				        	<%= comment.comment %>
+				        	<%= comment.comment %>に返信
 				        </h6>
 				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				          <span aria-hidden="true">&times;

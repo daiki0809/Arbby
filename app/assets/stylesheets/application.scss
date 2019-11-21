@@ -74,6 +74,10 @@ header {
 	color: white;
 }
 
+a {
+	color: #000000;
+}
+
 header ul {
 	overflow: auto;
 	text-align: right;
@@ -85,7 +89,7 @@ header li {
 	height: 100%;
 }
 
-a {
+header a {
 	color: #FFFFDD;
 }
 
@@ -96,11 +100,19 @@ a {
 
 .hobby_box {
 	float: left;
-	margin: 10px;
+	border: solid 8px #444444;
+	background-color: #EEEEEE;
+	margin: 20px;
 }
+
 .hobby_img_index {
 	width: 300px;
 	height: 300px;
+}
+
+.pagination {
+	display: block;
+	margin: 15px 0;
 }
 
 .hobby_img {
@@ -110,6 +122,7 @@ a {
 .hobby_img_show {
 	width: 450px;
 	height: 400px;
+	border: solid 6px #CCCCCC;
 }
 
 .user_info {
@@ -118,13 +131,6 @@ a {
 
 .hobby_img {
 	overflow: auto;
-}
-.user_hobby_index {
-	float: right;
-}
-
-.user_hobby_title {
-	float: right;
 }
 
 .user_hobby_img {
@@ -140,6 +146,10 @@ a {
 	border-radius: 50%;
 	border: solid 1px #ccc;
 	padding: 4px;
+}
+
+.bx-wrapper {
+	border: 5px solid #CCCCCC;
 }
 
 .profile_image_show {
@@ -374,7 +384,7 @@ a {
   background: rgba(0,0,0,0.8);
   color: #fff;
   width: 50%;
-  min-height: 0%;
+  min-height: 100%;
   display: none;
   z-index: 9;
 }
@@ -409,7 +419,7 @@ a {
 	border: solid 8px #555555;
 }
 
-.hobby_new-text {
+.hobby-text {
 	margin-bottom: 15px
 }
 
@@ -424,6 +434,66 @@ a {
 	background: rgba(255,255,255,0.8);
 }
 
+.hobbies-index-box {
+	overflow: auto;
+}
+
 #hobby_img {
 	margin-top: 15px;
+}
+
+#search-btn {
+	margin: 10px 0 10px 0;
+}
+
+#search-box {
+	display: none;
+}
+
+.hobby_box a {
+	font-size: 20px;
+}
+
+.hobby-show-box {
+	margin-top: 50px;
+}
+
+.hobby-btn {
+	display: inline-block;
+	margin: 0 10px;
+}
+
+.hobby-btn-box {
+	margin: 15px 0 15px 0;
+	text-align: center;
+}
+
+.hobby-show-body {
+	border: solid 6px #555555;
+	margin-bottom: 15px;
+	background-color: #EEEEEE;
+	left: 25%;
+}
+
+.new_hobby_comment {
+	margin: 0 auto 15px auto;
+}
+
+#comment_body {
+	height: 100px;
+}
+
+.table th, .table td {
+	vertical-align: middle;
+}
+
+.hobby-edit-filed {
+	padding: 12%;
+	background-image: url(/images/hobby_edit.jpg);
+	background-size: cover;
+	background-position: center;
+}
+
+.hobby-edit-box {
+	background-color: rgba(255,255,255,0.8);
 }

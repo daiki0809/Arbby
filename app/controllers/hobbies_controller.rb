@@ -23,7 +23,7 @@ class HobbiesController < ApplicationController
     end
      # 検索機能
     @q = Hobby.ransack(params[:q])
-    @hobbies = @q.result(distinct: true)
+    @hobbies = @q.result(distinct: true).page(params[:page]).reverse_order
   end
 
   def show

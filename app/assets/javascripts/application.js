@@ -154,3 +154,11 @@ jQuery(document).on('turbolinks:load', function(){
     });
    });
 });
+
+jQuery(document).on('turbolinks:load', function(){
+  $('#search-btn').click(function() {
+    $('#search-box').slideToggle();
+    $("#sesrch-icon").toggleClass("fas fa-search");
+    $("#sesrch-icon").toggleClass("fas fa-ban");
+  });
+});

@@ -95,3 +95,5 @@ gem 'font-awesome-rails'
 
 gem 'ransack'
 
+gem 'kaminari','~> 1.1.1'
+
