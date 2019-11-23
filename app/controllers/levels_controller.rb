@@ -1,4 +1,7 @@
 class LevelsController < ApplicationController
+
+	before_action :authenticate_user!
+
 	def update
 		@user = current_user
 		@challenge = Challenge.find(params[:id])

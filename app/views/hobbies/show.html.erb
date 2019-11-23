@@ -1,57 +1,69 @@
-<!-- 写真がなければノーイメージを表示-->
-<% if @hobby.images == [] %>
-	<div class="bx-wrapper">
-	<img src="../../assets/hobby_no_image.jpeg" class="hobby_img_show">
-	</div>
-<% else %>
-<!-- 写真が一枚ならスライドショーをさせない -->
-	<% if @hobby.images.length == 1 %>
-		<div class="bx-wrapper">
-	<% else %>
-		<div class="slider_show">
-	<% end %>
-		<% @hobby.images.each do |i| %>
-			<%= image_tag i.to_s, class: "hobby_img_show" %>
+<div class="container">
+	<div class="hobby-show-box">
+		<%= link_to user_path(@hobby.user) do %>
+			<%= image_tag @hobby.user.profile_image.to_s,  class: "round_img profile_image_show" %>
+			<p class="hobby-show-name">
+			<% if @hobby.user.nickname == nil %>
+				<%= @hobby.user.name %>
+			<% else %>
+				<%= @hobby.user.nickname %>
+			<% end %>
+			</p>
 		<% end %>
+		<!-- 写真がなければノーイメージを表示-->
+		<% if @hobby.images == [] %>
+			<div class="text-center">
+				<img src="../../assets/hobby_no_image.jpeg" class="hobby_img_show">
+			</div>
+		<% else %>
+		<!-- 写真が一枚ならスライドショーをさせない -->
+			<% if @hobby.images.length == 1 %>
+				<div class="text-center">
+			<% else %>
+				<div class="slider_show">
+			<% end %>
+				<% @hobby.images.each do |i| %>
+					<%= image_tag i.to_s, class: "hobby_img_show" %>
+				<% end %>
+				</div>
+		<% end %>
+	</div>
+
+	<div class="clearfix hobby-btn-box">
+		<!-- チャレンジボタン -->
+		<div id="challenge_button" class="hobby-btn">
+			<%= render 'challenges/button', hobby: @hobby %>
 		</div>
-<% end %>
 
-<!-- チャレンジボタン -->
-<div id="challenge_button">
-	<%= render 'challenges/button', hobby: @hobby %>
-</div>
+		<!-- びっくりボタン -->
+		<div id="surprise_button" class="hobby-btn">
+			<%= render 'surprises/button', hobby: @hobby %>
+		</div>
+	</div>
 
-<!-- びっくりボタン -->
-<div id="surprise_button">
-	<%= render 'surprises/button', hobby: @hobby %>
-</div><br>
+	<div class="hobby-show-body text-center col-lg-6">
+		<h3><%= @hobby.title %></h3>
+		<p><%= @hobby.body %></p>
+		<p>ジャンル：　<%= @hobby.genre.genre_name %></p>
+		<p>予算：　<%= @hobby.budget %>円</p>
 
-<%= image_tag @hobby.user.profile_image.to_s,  class: "round_img profile_image_show" %>
+		<% if @hobby.user == current_user %>
+			<p><%= link_to '編集する', edit_hobby_path(@hobby.id) %> /
+				<%= link_to '削除する', hobby_path, method: :delete %>
+			</p>
+		<% end %>
+	</div>
 
-<% if @hobby.user.nickname == nil %>
-	<%= @hobby.user.name %>
-<% else %>
-	<%= @hobby.user.nickname %>
-<% end %>
+	<!-- コメント -->
+	<div class="row mx-auto">
+		<%= form_for [@hobby, @comment], remote: true do |f| %>
+			<%= f.text_area :comment, id: "comment_body", class: "col-lg-12" %>
+			<%= f.submit 'コメントする', class: 'btn btn-secondary col-lg-12' %>
+		<% end %>
+	</div>
 
-<h3><%= @hobby.title %></h3>
-<p><%= @hobby.body %></p>
-<p><%= @hobby.genre.genre_name %></p>
-<p><%= @hobby.budget %></p>
-
-<% if @hobby.user == current_user %>
-	<p><%= link_to '編集する', edit_hobby_path(@hobby.id) %> /
-		<%= link_to '削除する', hobby_path, method: :delete %>
-	</p>
-<% end %>
-
-<!-- コメント -->
-<%= form_for [@hobby, @comment], remote: true do |f| %>
-	<%= f.text_area :comment, id: "comment_body" %>
-	<%= f.submit 'コメントする' %>
-<% end %>
-
-<!-- コメント一覧表示 -->
-<div id="hobby_comments_box">
-	<%= render 'hobby_comments/comments', comments: @comments, replies: @replies %>
+	<!-- コメント一覧表示 -->
+	<div id="hobby_comments_box">
+		<%= render 'hobby_comments/comments', comments: @comments, replies: @replies %>
+	</div>
 </div>

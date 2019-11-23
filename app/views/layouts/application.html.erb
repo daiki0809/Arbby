@@ -35,6 +35,8 @@
               </li>
               <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
               </li>
+              <li><%= link_to "ARBBYとは", homes_about_path%>
+              </li>
           </div>
 
             <div id="hm-icon">
@@ -45,10 +47,21 @@
               </a>
             </div>
           <% elsif admin_signed_in? %>
-            <li><%= link_to "ユーザ一覧", admin_users_path %></li>
-            <li><%= link_to "投稿一覧", admin_hobbies_path %></li>
-            <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-            </li>
+            <div id="sp-menu">
+              <li><%= link_to "ユーザ一覧", admin_users_path %></li>
+              <li><%= link_to "投稿一覧", admin_hobbies_path %></li>
+              <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+              </li>
+            </div>
+
+            <div id="hm-icon">
+              <a class="menu-trigger" href="#">
+                <span></span>
+                <span></span>
+                <span></span>
+              </a>
+            </div>
+
           <% else %>
             <%= link_to new_user_registration_path do %>
               <div class="header-manu">
@@ -58,6 +71,11 @@
             <%= link_to new_user_session_path do %>
               <div class="header-manu">
                 <li>ログイン</li>
+              </div>
+            <% end %>
+            <%= link_to homes_about_path do %>
+              <div class="header-manu">
+                <li>ARBBYとは</li>
               </div>
             <% end %>
           <% end %>

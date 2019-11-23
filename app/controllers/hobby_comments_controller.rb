@@ -1,5 +1,8 @@
 class HobbyCommentsController < ApplicationController
 
+	before_action :authenticate_user!
+
+
 	def create
 		@hobby = Hobby.find(params[:hobby_id])
 		hobby_comment = current_user.hobby_comments.new(hobby_comment_params)

@@ -1,4 +1,7 @@
 class HomesController < ApplicationController
+
+  before_action :authenticate_user!, only: [:gacha]
+
   def top
   end
 

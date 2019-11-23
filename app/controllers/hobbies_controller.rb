@@ -1,4 +1,7 @@
 class HobbiesController < ApplicationController
+
+  before_action :authenticate_user!
+
   def new
   	@hobby = Hobby.new
   end
@@ -23,7 +26,7 @@ class HobbiesController < ApplicationController
     end
      # 検索機能
     @q = Hobby.ransack(params[:q])
-    @hobbies = @q.result(distinct: true)
+    @hobbies = @q.result(distinct: true).page(params[:page]).reverse_order
   end
 
   def show
@@ -42,6 +45,9 @@ class HobbiesController < ApplicationController
 
   def edit
     @hobby = Hobby.find(params[:id])
+    if @hobby.user != current_user
+      redirect_to hobby_path(@hobby.id)
+    end
   end
 
   def update
@@ -51,6 +57,8 @@ class HobbiesController < ApplicationController
       hobby.budget = params[:provisional].to_i * 1000
     elsif params[:unit] == "c"
       hobby.budget = params[:provisional].to_i * 10000
+    else
+      hobby.budget = params[:provisional].to_i
     end
     hobby.update(hobby_params)
     redirect_to hobby_path(hobby.id)
@@ -64,7 +72,7 @@ class HobbiesController < ApplicationController
 
   def search
     @q = Hobby.ransack(search_params)
-    @hobbies = @q.result
+    @hobbies = @q.result.page(params[:page]).reverse_order
     @sort = "true"
     render action: :index
   end

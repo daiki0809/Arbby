@@ -1,5 +1,8 @@
 class SurprisesController < ApplicationController
 
+	before_action :authenticate_user!
+
+
 	def create
 		@hobby = Hobby.find(params[:hobby_id])
 		surprise = current_user.surprises.new(hobby_id: @hobby.id)

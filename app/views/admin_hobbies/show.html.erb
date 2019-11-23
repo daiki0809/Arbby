@@ -1,99 +1,106 @@
-<!-- 写真がなければノーイメージを表示-->
-<% if @hobby.images == [] %>
-	<div class="bx-wrapper">
-	<img src="../../assets/hobby_no_image.jpeg" class="hobby_img_show">
-	</div>
-<% else %>
-<!-- 写真が一枚ならスライドショーをさせない -->
-	<% if @hobby.images.length == 1 %>
-		<div class="bx-wrapper">
-	<% else %>
-		<div class="slider_show">
-	<% end %>
-		<% @hobby.images.each do |i| %>
-			<%= image_tag i.to_s, class: "hobby_img_show" %>
+<div class="container">
+	<div class="hobby-show-box">
+		<%= image_tag @hobby.user.profile_image.to_s,  class: "round_img profile_image_show" %>
+		<% if @hobby.user.nickname? %>
+			<%= @hobby.user.nickname %>
+		<% else %>
+			<%= @hobby.user.name %>
 		<% end %>
-		</div>
-<% end %>
-
-<!-- チャレンジボタン -->
-<div id="challenge_button">
-	<i id="challenge_icon" class="fas fa-fire-alt fa-3x fire_icon">
-	</i>
-	<%= @hobby.challenges.count %> チャレンジ
-</div>
-
-<!-- びっくりボタン -->
-<div id="surprise_button">
-	<i id="surprise_icon" class="far fa-surprise fa-3x surprise_icon">
-	</i>
-	<%= @hobby.surprises.count %> びっくり
-</div><br>
-
-<%= image_tag @hobby.user.profile_image.to_s,  class: "round_img profile_image_show" %>
-
-<% if @hobby.user.nickname == nil %>
-	<%= @hobby.user.name %>
-<% else %>
-	<%= @hobby.user.nickname %>
-<% end %>
-
-<h3><%= @hobby.title %></h3>
-<p><%= @hobby.body %></p>
-<p><%= @hobby.genre.genre_name %></p>
-<p><%= @hobby.budget %></p>
-
-<p>
-	<%= link_to '削除する', admin_hobby_path, method: :delete %>
-</p>
-
-<!-- コメント一覧表示 -->
-<div id="hobby_comments_box">
-	<table class="table table-condensed" style="border-collapse:collapse;">
-		<% @comments.each do |comment| %>
-			<tr data-toggle="collapse" data-target=".reply_comment<%= comment.id %>" class="accordion-toggle">
-				<td><%= image_tag comment.user.profile_image.to_s, class: "round_img profile_image_show" %>
-
-				<% if comment.user.nickname? %>
-					<%= comment.user.nickname %>
-				<% else %>
-					<%= comment.user.name %>
-				<% end %>
-				</td>
-				<td><%= comment.comment %></td>
-				<td>
-					<% if @replies.where(reply_comment: comment.id) != [] %>
-						<button type="button" class="btn btn-outline-primary">
-	   					返信を表示
-	  					</button>
-	  				<% end %>
-				</td>
-			</tr>
-
-		    <% @replies.where(reply_comment: comment.id).each do |reply| %>
-		    	<tr>
-		    		<td class="hiddenRow">
-		    			<div class="accordian-body collapse reply_comment<%= comment.id %>">
-		    				<%= image_tag reply.user.profile_image.to_s, class: "round_img reply_image"
-		    				%>
-
-							<% if reply.user.nickname? %>
-									<%= reply.user.nickname %>
-							<% else %>
-									<%= replyuser.name %>
-							<% end %>
-						</div>
-					</td>
-					<td class="hiddenRow">
-						<div class="accordian-body collapse reply_comment<%= comment.id %>">
-							<%= reply.comment %>
-							<i class="fas fa-level-up-alt">
-							</i>
-		    			</div>
-		    		</td>
-				</tr>
+		<!-- 写真がなければノーイメージを表示-->
+		<% if @hobby.images == [] %>
+			<div class="text-center">
+				<img src="../../assets/hobby_no_image.jpeg" class="hobby_img_show">
+			</div>
+		<% else %>
+		<!-- 写真が一枚ならスライドショーをさせない -->
+			<% if @hobby.images.length == 1 %>
+				<div class="text-center">
+			<% else %>
+				<div class="slider_show">
 			<% end %>
+				<% @hobby.images.each do |i| %>
+					<%= image_tag i.to_s, class: "hobby_img_show" %>
+				<% end %>
+				</div>
 		<% end %>
-	</table>
+	</div>
+
+	<div class="clearfix hobby-btn-box">
+		<!-- チャレンジボタン -->
+		<div id="challenge_button" class="hobby-btn">
+			<i id="challenge_icon" class="fas fa-fire-alt fa-3x fire_icon">
+			</i>
+			<%= @hobby.challenges.count %> チャレンジ
+		</div>
+
+		<!-- びっくりボタン -->
+		<div id="surprise_button" class="hobby-btn">
+			<i id="surprise_icon" class="far fa-surprise fa-3x surprise_icon">
+			</i>
+			<%= @hobby.surprises.count %> びっくり
+		</div>
+	</div>
+
+	<div class="hobby-show-body text-center col-lg-6">
+		<h3><%= @hobby.title %></h3>
+		<p><%= @hobby.body %></p>
+		<p>ジャンル：<%= @hobby.genre.genre_name %></p>
+		<p>予算：<%= @hobby.budget %>円</p>
+		<p>
+			<%= link_to '削除する', admin_hobby_path, method: :delete, class: "btn btn-outline-danger" %>
+		</p>
+	</div>
+
+	<!-- コメント一覧表示 -->
+	<div class="mx-auto">
+		<div id="hobby_comments_box">
+			<table class="table table-condensed" style="border-collapse:collapse;">
+				<% @comments.each do |comment| %>
+					<tr data-toggle="collapse" data-target=".reply_comment<%= comment.id %>" class="accordion-toggle">
+						<td style="width:20%"><%= image_tag comment.user.profile_image.to_s, class: "round_img profile_image_comment" %>
+
+						<% if comment.user.nickname? %>
+							<%= comment.user.nickname %>
+						<% else %>
+							<%= comment.user.name %>
+						<% end %>
+						</td>
+						<td style="width:50%"><%= comment.comment %></td>
+						<td style="width:30%">
+							<% if @replies.where(reply_comment: comment.id) != [] %>
+								<button type="button" class="btn btn-outline-primary">
+			   					返信を表示
+			  					</button>
+			  				<% end %>
+						</td>
+					</tr>
+
+				    <% @replies.where(reply_comment: comment.id).each do |reply| %>
+				    	<tr>
+				    		<td class="hiddenRow">
+				    			<div class="accordian-body collapse reply_comment<%= comment.id %>">
+				    				<%= image_tag reply.user.profile_image.to_s, class: "round_img reply_image"
+				    				%>
+
+									<% if reply.user.nickname? %>
+											<%= reply.user.nickname %>
+									<% else %>
+											<%= replyuser.name %>
+									<% end %>
+								</div>
+							</td>
+							<td class="hiddenRow">
+								<div class="accordian-body collapse reply_comment<%= comment.id %>">
+									<%= reply.comment %>
+									<i class="fas fa-level-up-alt">
+									</i>
+				    			</div>
+				    		</td>
+						</tr>
+					<% end %>
+				<% end %>
+			</table>
+		</div>
+	</div>
 </div>
 

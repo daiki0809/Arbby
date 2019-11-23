@@ -1,17 +1,22 @@
-<h1>ユーザ一覧</h1>
+<div class="container">
+	<h1>ユーザ一覧</h1>
+	<div class="row">
+		<% @users.each do |user| %>
+			<div class="margin-bottom text-center col-lg-3">
+				<%= link_to admin_user_path(user.id) do %>
+					<div class="admin-user-box">
+						<%= image_tag user.profile_image.to_s, class: "round_img admin_index_profile_img" %><br>
 
-<% @users.each do |user| %>
-	<%= link_to admin_user_path(user.id) do %>
-		<div>
-			<%= image_tag user.profile_image.to_s, class: "round_img admin_index_profile_img" %><br>
-
-			<% if user.nickname == nil %>
-				<%= user.name %>
-			<% else %>
-				<%= user.nickname %>
-			<% end %>
-			<br>
-			レベル. <%= user.level_id %>
-		</div>
-	<% end %>
-<% end %>
+						<% if user.nickname? %>
+							<%= user.nickname %>
+						<% else %>
+							<%= user.name %>
+						<% end %>
+						<br>
+						レベル. <%= user.level_id %>
+					</div>
+				<% end %>
+			</div>
+		<% end %>
+	</div>
+</div>

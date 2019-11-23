@@ -1,5 +1,7 @@
 class ChallengesController < ApplicationController
 
+before_action :authenticate_user!
+
 	def create
 		@hobby = Hobby.find(params[:hobby_id])
 		challenge = current_user.challenges.new(hobby_id: @hobby.id)

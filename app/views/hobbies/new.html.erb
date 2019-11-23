@@ -1,30 +1,30 @@
 
-	<div class="text-center">
-		<div class="hobby-new-field">
-			<div class="hobby-new-box">
-				<%= form_for @hobby do |f| %>
-					<%= f.file_field :images, multiple: true, id: "hobby_img" %><br>
-					<div id="img_prev_index">
-				<!-- 画像をプレビュ -->
-						<%= image_tag "sample.jpg", class: "img_prev img_prev_add_0" %>
+<div class="text-center">
+	<div class="hobby-new-field">
+		<div class="hobby-new-box">
+			<%= form_for @hobby do |f| %>
+				<%= f.file_field :images, multiple: true, id: "hobby_img" %><br>
+				<div id="img_prev_index">
+			<!-- 画像をプレビュ -->
+					<%= image_tag "sample.jpg", class: "img_prev img_prev_add_0" %>
 
-					</div>
+				</div>
 
-					<%= f.text_field :title, :placeholder => "タイトル", class: "col-8 hobby_new-text" %><br>
-					<%= f.text_area :body, :placeholder => "説明", class: "col-8 hobby_new-text" %>
-					<br>
-					<%= select_tag 'genre', options_from_collection_for_select(Genre.all, :id, :genre_name), class: "col-8 hobby_new-text" %><br>
+				<%= f.text_field :title, :placeholder => "タイトル", class: "col-lg-8 margin-bottom" %><br>
+				<%= f.text_area :body, :placeholder => "説明", class: "col-lg-8 margin-bottom" %>
+				<br>
+				<%= select_tag 'genre', options_from_collection_for_select(Genre.all, :id, :genre_name), class: "col-lg-8 margin-bottom" %><br>
 
-					<%= f.number_field :budget, :placeholder => "予算", class: "col-6 hobby_new-text" %>
-					<%= select_tag 'unit', options_for_select([['円', 'a'], ['千円','b'],['万円', 'c']]), class: "col-2 hobby_new-text" %><br>
-					<%= f.label :hobby_point, "経験値設定", class: "hobby_new-text" %>
-					<%= f.select :hobby_point, [1,2,3,4,5,6,7,8,9,10] %><br>
+				<%= f.number_field :budget, :placeholder => "予算", class: "col-lg-6 margin-bottom" %>
+				<%= select_tag 'unit', options_for_select([['円', 'a'], ['千円','b'],['万円', 'c']]), class: "col-lg-2 margin-bottom" %><br>
+				<%= f.label :hobby_point, "経験値設定", class: "margin-bottom" %>
+				<%= f.select :hobby_point, [1,2,3,4,5,6,7,8,9,10] %><br>
 
-					<%= f.submit "投稿する", class: "col-8 hobby_new-text btn btn-secondary" %>
-				<% end %>
-			</div>
+				<%= f.submit "投稿する", class: "col-lg-8 margin-bottom btn btn-secondary" %>
+			<% end %>
 		</div>
 	</div>
+</div>
 
 <script type="text/javascript">
 $(function() {
