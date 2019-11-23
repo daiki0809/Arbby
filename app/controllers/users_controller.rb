@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+
+  before_action :authenticate_user!
+
   def show
   	@user = User.find(params[:id])
   	@hobbies = @user.hobbies
@@ -10,7 +13,10 @@ class UsersController < ApplicationController
   end
 
   def edit
-  	@user = current_user
+  	@user = User.find(params[:id])
+    if @user != current_user
+      redirect_to edit_user_path(current_user.id)
+    end
   end
 
   def update

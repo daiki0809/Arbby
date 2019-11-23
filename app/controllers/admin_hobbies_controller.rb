@@ -1,5 +1,7 @@
 class AdminHobbiesController < ApplicationController
 
+	before_action :authenticate_admin!
+
 	def index
 		if params[:q].present?
 		  @search = "true"
@@ -7,7 +9,7 @@ class AdminHobbiesController < ApplicationController
 		end
 		 # 検索機能
 		@q = Hobby.ransack(params[:q])
-		@hobbies = @q.result(distinct: true)
+		@hobbies = @q.result(distinct: true).page(params[:page]).reverse_order
 	end
 
 	def show
@@ -24,7 +26,7 @@ class AdminHobbiesController < ApplicationController
 
 	def search
 		@q = Hobby.ransack(search_params)
-		@hobbies = @q.result
+		@hobbies = @q.result.page(params[:page]).reverse_order
 		@sort = "true"
 		render action: :index
 	end

@@ -28,12 +28,6 @@
   box-sizing: border-box;
 }
 
-.clearfix::after {
-  content: "";
-  display: block;
-  clear: both;
-}
-
 body {
 	font-family: 'Noto Sans JP', sans-serif;
 }
@@ -93,16 +87,59 @@ header a {
 	color: #FFFFDD;
 }
 
+input[type='text']{
+  width: 40%;
+  max-width: 400px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+input[type='text']:focus {
+	width: 60%;
+}
+
+input[type='email']{
+  width: 40%;
+  max-width: 400px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+input[type='email']:focus {
+	width: 60%;
+}
+
+input[type='password']{
+  width: 40%;
+  max-width: 400px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+input[type='password']:focus {
+	width: 60%;
+}
+
 .img_prev {
 	width: 200px;
 	height: 200px;
 }
 
 .hobby_box {
-	float: left;
 	border: solid 8px #444444;
 	background-color: #EEEEEE;
-	margin: 20px;
 }
 
 .hobby_img_index {
@@ -153,6 +190,15 @@ header a {
 }
 
 .profile_image_show {
+	width: 159px;
+	height: 150px;
+}
+
+.hobby-show-name {
+	font-size: 30px;
+}
+
+.profile_image_comment {
 	width: 100px;
 	height: 100px;
 }
@@ -210,20 +256,46 @@ header a {
 	padding: 0 4px !important;
 }
 
+.gacha-back-img {
+	background-image: url(/images/gacha.jpg);
+	background-size: cover;
+	background-position: center;
+	margin: 12%;
+}
+
+.gacha-field {
+	padding: 10%;
+}
+
+.gacha-box {
+	background-color: rgba(255,255,255,0.8);
+	padding-bottom: 15px;
+}
+
 #gacha_hobby {
 	display: none;
+	background-color: gray;
+	width: 500px;
+}
+
+.gacha_text {
+	color: white;
+	font-size: 30px;
 }
 
 #rare {
 	display: none;
 }
 .rare_icon {
-	display: none;
-	float: left;
+	display: inline-block;
+	visibility: hidden;
 }
 
+.rare-show {
+	visibility: visible;
+}
 .fa-star {
-	color: #FFD700;
+	color: #FFCC00;
 	float: left;
 }
 
@@ -419,10 +491,6 @@ header a {
 	border: solid 8px #555555;
 }
 
-.hobby-text {
-	margin-bottom: 15px
-}
-
 .hobby-new-field {
 	background-image: url(/images/hobby_new.jpg);
 	background-size: cover;
@@ -470,9 +538,8 @@ header a {
 
 .hobby-show-body {
 	border: solid 6px #555555;
-	margin-bottom: 15px;
+	margin: 0 auto 15px auto;
 	background-color: #EEEEEE;
-	left: 25%;
 }
 
 .new_hobby_comment {
@@ -496,4 +563,93 @@ header a {
 
 .hobby-edit-box {
 	background-color: rgba(255,255,255,0.8);
+}
+
+.challenge_calendar {
+	margin-bottom: 5px;
+}
+
+.challenge_times {
+	font-size: 18px;
+}
+
+.level-modal-text {
+	color: white;
+}
+
+.user-show-box {
+	margin-top: 15px;
+}
+
+.user-show-back-img {
+	background-image: url(/images/user-show.jpg);
+	background-size: cover;
+	background-position: center;
+}
+
+.user-show-back-color {
+	background-color: rgba(255,255,255,0.8);
+}
+
+.user-edit-filed {
+	padding: 12%;
+	background-image: url(/images/user-edit.jpg);
+	background-size: cover;
+	background-position: center;
+}
+
+#profile_image {
+	margin-top: 15px;
+}
+
+.user-edit-box {
+	background-color: rgba(255,255,255,0.8);
+}
+
+#img_prev_user_box {
+	margin: 15px 0 15px 0;
+}
+
+.margin-bottom {
+	margin-bottom: 15px;
+}
+
+.admin-user-box {
+	border: solid 8px gray;
+	font-size: 18px;
+}
+
+.admin_index_profile_img {
+	width: 200px;
+	height: 200px;
+}
+
+.margin-top {
+	margin-top: 15px;
+}
+
+.about-img {
+	width: 100%;
+	height: 200px;
+	background-image: url(/images/about.jpg);
+	background-size: cover;
+	background-position: center;
+}
+
+.about-title {
+	margin: 20px 0;
+}
+
+.about-title-box {
+	background-color: #C0C0C0;
+	padding: 20px;
+}
+
+.display-none {
+	display: none;
+}
+
+.about-manu:hover {
+	color: blue;
+	cursor: pointer;
 }

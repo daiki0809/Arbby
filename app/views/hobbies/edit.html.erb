@@ -9,18 +9,20 @@
 						<%= image_tag i.to_s, class: "img_prev" %>
 					<% end %>
 				</div>
-
-				<%= f.text_field :title, class: "hobby-text col-8" %><br>
-				<%= f.text_area :body, class: "hobby-text col-8" %>
+				<%= f.label :title, "タイトル" %><br>
+				<%= f.text_field :title, class: "margin-bottom col-lg-8" %><br>
+				<%= f.label :body, "本文" %><br>
+				<%= f.text_area :body, class: "margin-bottom col-lg-8" %>
 				<br>
-				<%= select_tag 'genre', options_from_collection_for_select(Genre.all, :id, :genre_name, { :selected => @hobby.genre_id }), class: "hobby-text col-8" %><br>
-
-				<%= number_field_tag 'provisional', @hobby.budget, class: "col-6 hobby-text" %>
-				<%= select_tag 'unit', options_for_select([['円', 'a'], ['千円','b'],['万円', 'c']]), class: "hobby-text col-2" %><br>
+				<%= label_tag :genre, "ジャンル" %>
+				<%= select_tag 'genre', options_from_collection_for_select(Genre.all, :id, :genre_name, { :selected => @hobby.genre_id }), class: "margin-bottom" %><br>
+				<%= label_tag :provisional, "予算" %><br>
+				<%= number_field_tag 'provisional', @hobby.budget, class: "col-lg-4 margin-bottom" %>
+				<%= select_tag 'unit', options_for_select([['円', 'a'], ['千円','b'],['万円', 'c']]), class: "margin-bottom col-lg-2" %><br>
 				<%= f.label :hobby_point, "経験値設定" %>
-				<%= f.select :hobby_point, [1,2,3,4,5,6,7,8,9,10], class: "hobby-text" %><br>
+				<%= f.select :hobby_point, [1,2,3,4,5,6,7,8,9,10], class: "margin-bottom" %><br>
 
-				<%= f.submit "投稿する", class: "hobby-text col-8 btn btn-secondary" %>
+				<%= f.submit "更新する", class: "margin-bottom col-lg-8 btn btn-secondary" %>
 
 			<% end %>
 		</div>

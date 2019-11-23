@@ -1,7 +1,7 @@
 <table class="table table-condensed" style="border-collapse:collapse;">
 	<% comments.each do |comment| %>
 		<tr data-toggle="collapse" data-target=".reply_comment<%= comment.id %>" class="accordion-toggle">
-			<td style="width:20%"><%= image_tag comment.user.profile_image.to_s, class: "round_img profile_image_show" %>
+			<td style="width:20%"><%= image_tag comment.user.profile_image.to_s, class: "round_img profile_image_comment" %>
 
 			<% if comment.user.nickname? %>
 				<%= comment.user.nickname %>
@@ -14,13 +14,13 @@
 
 			<% if comment.user == current_user %>
 				<td style="width:20%">
-					<%= link_to '削除する', hobby_hobby_comments_path(comment.id), method: :delete, class: 'btn btn-outline-danger col-10', remote: true
+					<%= link_to '削除する', hobby_hobby_comments_path(comment.id), method: :delete, class: 'btn btn-outline-danger col-lg-10', remote: true
 					%>
 					<% if comment.private == false %>
-						<%= link_to '非公開にする', hobby_hobby_comments_path(comment.id), method: :patch, class: 'btn btn-outline-dark col-10', remote: true
+						<%= link_to '非公開にする', hobby_hobby_comments_path(comment.id), method: :patch, class: 'btn btn-outline-dark col-lg-10', remote: true
 						 %>
 					<% else %>
-						<%= link_to '公開する', hobby_hobby_comments_path(comment.id), method: :patch, class: 'btn btn-outline-info col-10', remote: true
+						<%= link_to '公開する', hobby_hobby_comments_path(comment.id), method: :patch, class: 'btn btn-outline-info col-lg-10', remote: true
 						 %>
 					<% end %>
 				</td>

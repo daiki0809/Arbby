@@ -1,76 +1,91 @@
 
-<h1>趣味一覧</h1
->
-<!-- 検索フォーム -->
-<%= search_form_for @q do |f| %>
-	<%= f.label :genre, "ジャンル" %>
-	<% if @search == "true" %>
-		<%= f.select :genre_id_eq, options_for_select([["運動系", 1], ["頭脳系", 2], ["作る系", 3], ["学ぶ系", 4], ["自然系", 5], ["その他", 6]], selected: params[:q][:genre_id_eq]), include_blank: true %>
+<div class="container">
+	<!-- 検索表示ボタン -->
+	<button  id="search-btn" class="btn btn-outline-dark">
+		<i id="sesrch-icon" class="fas fa-search"></i>
+	</button>
 
-		<%= f.label :budget, "予算" %>
-		<%= f.number_field :budget_gteq, value: params[:q][:budget_gteq].to_i %>円〜
-		<% if params[:q][:budget_lt].to_i == 0 %>
-			<%= f.number_field :budget_lt %>円未満
-		<% else %>
-			<%= f.number_field :budget_lt, value: params[:q][:budget_lt].to_i %>円未満
-		<% end %>
-	<% else %>
-		<%= f.select :genre_id_eq, options_for_select([["運動系", 1], ["頭脳系", 2], ["作る系", 3], ["学ぶ系", 4], ["自然系", 5], ["その他", 6]]), include_blank: true %>
+	<div id="search-box">
+		<!-- 検索フォーム -->
+		<%= search_form_for @q, url: admin_hobbies_path do |f| %>
+			<%= f.label :genre, "ジャンル" %>
+			<% if @search == "true" %>
+				<%= f.select :genre_id_eq, options_for_select([["運動系", 1], ["頭脳系", 2], ["作る系", 3], ["学ぶ系", 4], ["自然系", 5], ["その他", 6]], selected: params[:q][:genre_id_eq]), include_blank: true %>
 
-		<%= f.label :budget, "予算" %>
-		<%= f.number_field :budget_gteq  %>円〜
-		<%= f.number_field :budget_lt %>円未満
-	<% end %>
-	<%= f.submit "検索" %>
-<% end %>
-
-<!-- 並び替え -->
-<%= search_form_for @q, url: search_hobbies_path, method: :post, class: 'submit' do |f| %>
-	<%= f.label :sorts, "並べ替え" %>
-	<% if @sort == "true" %>
-		<%= f.select :sorts, [['新しい投稿順','id desc'],['古い投稿順', 'id asc'], ['人気チャレンジ','challenges_count desc'], ['びっくり順', 'surprises_count desc']], selected: params[:q][:sorts] %>
-	<% else %>
-		<%= f.select :sorts, [['新しい投稿順','id desc'],['古い投稿順', 'id asc'], ['人気チャレンジ順','challenges_count desc'], ['びっくり順', 'surprises_count desc']]
-		%>
-	<% end %>
-<% end %>
-
-
-<% @hobbies.each do |hobby| %>
-		<div class= hobby_box >
-			<%= image_tag hobby.user.profile_image.to_s, class: "round_img hobby_index_profile_img" %>
-
-			<% if hobby.user.nickname == nil %>
-				<%= hobby.user.name %>
+				<%= f.label :budget, "予算" %>
+				<%= f.number_field :budget_gteq, value: params[:q][:budget_gteq].to_i %>円〜
+				<% if params[:q][:budget_lt].to_i == 0 %>
+					<%= f.number_field :budget_lt %>円未満
+				<% else %>
+					<%= f.number_field :budget_lt, value: params[:q][:budget_lt].to_i %>円未満
+				<% end %>
 			<% else %>
-				<%= hobby.user.nickname %>
-			<% end %>
-				<br>
+				<%= f.select :genre_id_eq, options_for_select([["運動系", 1], ["頭脳系", 2], ["作る系", 3], ["学ぶ系", 4], ["自然系", 5], ["その他", 6]]), include_blank: true %>
 
-			<%= link_to admin_hobby_path(hobby.id) do %>
-				<div class="hobby_img">
-					<!-- 写真がなければノーイメージを表示-->
-					<% if hobby.images. == [] %>
-						<div class="bx-wrapper">
-							<img src="../../assets/hobby_no_image.jpeg" class="hobby_img_index">
-						</div>
+				<%= f.label :budget, "予算" %>
+				<%= f.number_field :budget_gteq  %>円〜
+				<%= f.number_field :budget_lt %>円未満
+			<% end %>
+			<%= f.submit "検索" %>
+		<% end %>
+
+		<!-- 並び替え -->
+		<%= search_form_for @q, url: search_admin_hobbies_path, method: :post, class: 'submit' do |f| %>
+			<%= f.label :sorts, "並べ替え" %>
+			<% if @sort == "true" %>
+				<%= f.select :sorts, [['新しい投稿順','id desc'],['古い投稿順', 'id asc'], ['人気チャレンジ','challenges_count desc'], ['びっくり順', 'surprises_count desc']], selected: params[:q][:sorts] %>
+			<% else %>
+				<%= f.select :sorts, [['新しい投稿順','id desc'],['古い投稿順', 'id asc'], ['人気チャレンジ順','challenges_count desc'], ['びっくり順', 'surprises_count desc']]
+				%>
+			<% end %>
+		<% end %>
+	</div>
+
+	<div class="row">
+		<% @hobbies.each do |hobby| %>
+			<div class="text-center col-lg-4 margin-bottom">
+				<div class="hobby_box">
+					<%= image_tag hobby.user.profile_image.to_s, class: "round_img hobby_index_profile_img" %>
+
+					<% if hobby.user.nickname == nil %>
+						<%= hobby.user.name %>
 					<% else %>
-					<!-- 写真が一枚ならスライドショーをさせない -->
-						<% if hobby.images.length == 1 %>
-							<div class="bx-wrapper">
-						<% else %>
-							<div class="slider_index">
-						<% end %>
+						<%= hobby.user.nickname %>
+					<% end %>
+						<br>
+
+					<%= link_to admin_hobby_path(hobby.id) do %>
+						<div class="hobby_img mx-auto">
+							<!-- 写真がなければノーイメージを表示-->
+							<% if hobby.images. == [] %>
+								<div class="bx-wrapper">
+									<img src="../../assets/hobby_no_image.jpeg" class="hobby_img_index">
+								</div>
+							<% else %>
+							<!-- 写真が一枚ならスライドショーをさせない -->
+								<% if hobby.images.length == 1 %>
+									<div class="bx-wrapper">
+								<% else %>
+									<div class="slider_index">
+								<% end %>
 								<% hobby.images.each do |i| %>
 									<%= image_tag i.to_s, class: "hobby_img_index" %>
 								<% end %>
-							</div>
+								</div>
+							<% end %>
+							<p><%= hobby.title %></p>
+						</div>
 					<% end %>
-					<p><%= hobby.title %></p>
 				</div>
-			<% end %>
-		</div>
-<% end %>
+			</div>
+		<% end %>
+	</div>
+	<div class="text-center">
+		<!-- kaminariのページャ -->
+		<%= paginate @hobbies, class: "paginate"
+			%>
+	</div>
+</div>
 
 <script>
 		$("#q_sorts").attr('onchange', 'submit(this.form)');
