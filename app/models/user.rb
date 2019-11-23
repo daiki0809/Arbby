@@ -12,8 +12,9 @@ class User < ApplicationRecord
          has_many :surprises, dependent: :destroy
          has_many :hobby_comments, dependent: :destroy
 
-
          belongs_to :level
+
+         validates :name, presence: true
 
          acts_as_paranoid
 # ツイッターでログインの記述
