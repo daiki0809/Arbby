@@ -12,3 +12,21 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
+
+Rails.application.config.assets.precompile += %w( gacha.js )
+
+Rails.application.config.assets.precompile += %w( about.js )
+
+Rails.application.config.assets.precompile += %w( hobby_search.js )
+
+Rails.application.config.assets.precompile += %w( hobby_show.js )
+
+Rails.application.config.assets.precompile += %w( event_index.js )
+
+Rails.application.config.assets.precompile += %w( hobby_edit.js )
+
+Rails.application.config.assets.precompile += %w( hobby_new.js )
+
+Rails.application.config.assets.precompile += %w( user_edit.js )
+
+Rails.application.config.assets.precompile += %w( user_show.js )

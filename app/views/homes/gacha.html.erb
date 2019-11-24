@@ -28,7 +28,8 @@
 								</div>
 								<div class="col-lg-12 margin-top margin-bottom">
 									<p class="gacha_text"><%= @hobby.title %></p>
-									<%= link_to '詳細画面へ', hobby_path(@hobby.id), class: 'btn btn-light'%>
+									<%= link_to '詳細画面へ', hobby_path(@hobby.id), class: 'btn btn-light
+									'%>
 								</div>
 							</div>
 						</div>
@@ -39,47 +40,5 @@
 	</div>
 </div>
 
-<script>
-	function repeat_show(elems$) {
-		loopSleep(<%= @rare %>, 200, function(i){elems$.eq(i).addClass('rare-show');
-		});
-
-		function loopSleep(_loopLimit,_interval, _mainFunc){
-		  var loopLimit = _loopLimit;
-		  var interval = _interval;
-		  var mainFunc = _mainFunc;
-		  var i = 0;
-		  var loopFunc = function () {
-		    var result = mainFunc(i);
-		    if (result === false) {
-		      // break機能
-		      return;
-		    }
-		    i = i + 1;
-		    if (i < loopLimit) {
-		      setTimeout(loopFunc, interval);
-		    }
-		  }
-		  loopFunc();
-		}
-	}
-
-	$("#gacha button").click(function(color) {
-		$(this).hide();
-		$("#rare").show('slow', function(){
-			repeat_show($(".rare_icon"));
-		});
-			<% if @rare <= 2 %>
-				var color = "gray";
-			<% elsif @rare <= 4 %>
-				var color = "#CC0000";
-			<% else %>
-				var color = "#D0FF43";
-			<% end %>
-		setTimeout(function(){
-			$("#gacha_hobby").show('slow', function(){
-			$(this).css('border', `10px solid ${color}`);
-			})
-		}, 2000);
-	});
-</script>
+<!-- ガチャ演出 -->
+<%= javascript_include_tag "gacha" %>
