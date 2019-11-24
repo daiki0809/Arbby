@@ -118,6 +118,7 @@ jQuery(document).on('turbolinks:load', function(){
   });
 });
 
+// カレンダー一括削除
 jQuery(document).on('turbolinks:load', function(){
   $("#event-delete_all_btn").click(function(){
   Swal.fire({
@@ -138,14 +139,6 @@ jQuery(document).on('turbolinks:load', function(){
 });
 });
 
-// コメント返信表示
-$('.accordian-body').on('show.bs.collapse', function () {
-    $(this).closest("table")
-        .find(".collapse.in")
-        .not(this)
-        .collapse('toggle')
-})
-
 // ハンバーガメニュー
 jQuery(document).on('turbolinks:load', function(){
   $(function() {
@@ -155,43 +148,4 @@ jQuery(document).on('turbolinks:load', function(){
       return false;
     });
    });
-});
-
-// 検索欄を表示
-jQuery(document).on('turbolinks:load', function(){
-  $('#search-btn').click(function() {
-    $('#search-box').slideToggle();
-    $("#sesrch-icon").toggleClass("fas fa-search");
-    $("#sesrch-icon").toggleClass("fas fa-ban");
-  });
-});
-
-jQuery(document).on('turbolinks:load', function(){
-  $('#about-post-title').click(function() {
-    $('#about-post').slideToggle();
-  });
-});
-
-jQuery(document).on('turbolinks:load', function(){
-  $('#about-challenge-btn-title').click(function() {
-    $('#about-challenge-btn').slideToggle();
-  });
-});
-
-jQuery(document).on('turbolinks:load', function(){
-  $('#about-challenge-title').click(function() {
-    $('#about-challenge').slideToggle();
-  });
-});
-
-jQuery(document).on('turbolinks:load', function(){
-  $('#about-calendar-title').click(function() {
-    $('#about-calendar').slideToggle();
-  });
-});
-
-jQuery(document).on('turbolinks:load', function(){
-  $('#about-surprise').click(function() {
-    $('#about-surprise-title').slideToggle();
-  });
 });

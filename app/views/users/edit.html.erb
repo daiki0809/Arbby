@@ -24,17 +24,5 @@
   </div>
 </div>
 
-<script type="text/javascript">
-  $(function() {
-    function readURL(input) {
-       var reader = new FileReader();
-       reader.onload = function (e) {
-    $('#img_prev_user').attr('src', e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-    $("#profile_image").change(function(){
-        readURL(this);
-    });
-  });
-</script>
+<!-- 画像のプレビューを表示 -->
+<%= javascript_include_tag "user_edit" %>

@@ -4,13 +4,5 @@
 <%= render 'events/edit', events: @events %>
 </div>
 
-
-<!-- カレンダー登録時、カレンダーで日時を選べる -->
-<script type="text/javascript">
-	jQuery(function($) {
-	        $('.start').datetimepicker();
-	    $('.end').each(function() {
-	    	$(this).datetimepicker();
-	    });
-	    });
-	</script>
+<!-- カレンダー登録時、カレンダーを表示 -->
+<%= javascript_include_tag "event_index" %>
