@@ -20,9 +20,16 @@ class UsersController < ApplicationController
   end
 
   def update
-  	user = current_user
-  	user.update(user_params)
-  	redirect_to user_path(user.id)
+  	@user = User.find(params[:id])
+    if @user != current_user
+      redirect_to user_path(@user.id)
+    end
+  	if @user.update(user_params)
+  	 redirect_to user_path(@user.id)
+    else
+      flash.now[:danger] = "入力不十分の項目があります。"
+      render action: :edit
+    end
   end
 
   def destroy

@@ -4,4 +4,10 @@ $('.modal-backdrop').hide();
 
 $('#events-index').html("<%= j(render 'events/edit', events: @events) %>");
 
-Swal.fire('更新しました！', '', 'success');
+<% if @error1 == true %>
+	Swal.fire('入力エラー', '開始日は終了日より前にしてください。', 'error');
+<% elsif @error2 == true %>
+	Swal.fire('入力エラー', '日時が入っておりません。', 'error');
+<% else %>
+	Swal.fire('更新しました！', '', 'success');
+<% end %>

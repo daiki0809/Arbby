@@ -7,16 +7,20 @@ class HobbiesController < ApplicationController
   end
 
   def create
-  	hobby = Hobby.new(hobby_params)
+  	@hobby = Hobby.new(hobby_params)
   	if params[:unit] == "b"
-  		hobby.budget = hobby.budget * 1000
+  		@hobby.budget = @hobby.budget * 1000
   	elsif params[:unit] == "c"
-  		hobby.budget = hobby.budget * 10000
+  		@hobby.budget = @hobby.budget * 10000
   	end
-  	hobby.user_id = current_user.id
-  	hobby.genre_id = params[:genre]
-  	hobby.save
-  	redirect_to hobbies_path
+  	@hobby.user_id = current_user.id
+  	@hobby.genre_id = params[:genre]
+  	if @hobby.save
+  	   redirect_to hobbies_path
+    else
+      flash.now[:danger] = "入力不十分な項目があります。"
+      render action: :new
+    end
   end
 
   def index
@@ -51,21 +55,31 @@ class HobbiesController < ApplicationController
   end
 
   def update
-    hobby = Hobby.find(params[:id])
-    hobby.genre_id = params[:genre]
-    if params[:unit] == "b"
-      hobby.budget = params[:provisional].to_i * 1000
-    elsif params[:unit] == "c"
-      hobby.budget = params[:provisional].to_i * 10000
-    else
-      hobby.budget = params[:provisional].to_i
+    @hobby = Hobby.find(params[:id])
+    if @hobby.user != current_user
+      redirect_to hobbies_path
     end
-    hobby.update(hobby_params)
-    redirect_to hobby_path(hobby.id)
+    @hobby.genre_id = params[:genre]
+    if params[:unit] == "b"
+      @hobby.budget = params[:provisional].to_i * 1000
+    elsif params[:unit] == "c"
+      @hobby.budget = params[:provisional].to_i * 10000
+    else
+      @hobby.budget = params[:provisional].to_i
+    end
+    if @hobby.update(hobby_params)
+      redirect_to hobby_path(@hobby.id)
+    else
+      flash.now[:danger] = "入力不十分な項目があります。"
+      render action: :edit
+    end
   end
 
   def destroy
     hobby = Hobby.find(params[:id])
+    if hobby.user != current_user
+      redirect_to hobbies_path
+    end
     hobby.destroy
     redirect_to hobbies_path
   end

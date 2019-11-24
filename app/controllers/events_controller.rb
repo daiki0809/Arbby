@@ -3,9 +3,16 @@ class EventsController < ApplicationController
 before_action :authenticate_user!
 
 	def create
-		@challenge_id = params[:challenge]
-		event = current_user.events.new(event_params)
-		event.save
+		if params[:event][:start] > params[:event][:end]
+			@error1 = true
+		else
+			@challenge_id = params[:challenge]
+			event = current_user.events.new(event_params)
+			if event.save
+			else
+				@error2 = true
+			end
+		end
 	end
 
 	def index
@@ -16,12 +23,25 @@ before_action :authenticate_user!
 	def update
 		some_date = Time.now
 		@event = Event.find(params[:id])
-		@event.update(event_params)
+		if params[:event][:start] > params[:event][:end]
+			@error1 = true
+		else
+			if @event.user != current_user
+				redirect_to events_path
+			end
+			if @event.update(event_params)
+			else
+				@error2 = true
+			end
+		end
 		@events = current_user.events.where("start >= :date", date: some_date.beginning_of_day)
 	end
 
 	def destroy
 		event = Event.find(params[:id])
+		if @event.user != current_user
+			redirect_to events_path
+		end
 		event.destroy
 		some_date = Time.now
 		@events = current_user.events.where("start >= :date", date: some_date.beginning_of_day)
