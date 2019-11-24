@@ -1,6 +1,11 @@
 <div class="text-center">
   <div class="user-edit-filed">
     <div class="user-edit-box">
+      <% if flash[:danger] %>
+        <div class="flash">
+          <%= flash[:danger] %>
+        </div>
+      <% end %>
       <%= form_for @user do |f| %>
       	<%= f.file_field :profile_image, id: "profile_image" %><br>
       	<div id="img_prev_user_box">
@@ -8,9 +13,9 @@
       		<%= image_tag @user.profile_image.to_s, id: "img_prev_user", class: "round_img" %><br>
       	</div>
 
-        <%= f.label :name, "Name" %><br>
+        <%= f.label :name, "名前" %><br>
       	<%= f.text_field :name, class: "margin-bottom" %><br>
-        <%= f.label :name, "Nickname" %><br>
+        <%= f.label :name, "ニックネーム" %><br>
       	<%= f.text_field :nickname, class: "margin-bottom" %><br>
       	<%= f.submit '更新する', class: "margin-bottom btn btn-outline-success col-lg-6" %><br>
       	<%= link_to '退会する', user_path(@user.id), method: :delete, class: "margin-bottom btn-outline-danger btn col-lg-6" %>

@@ -1,6 +1,11 @@
 <div class="text-center">
 	<div class="hobby-edit-filed">
 		<div class="hobby-edit-box">
+			<% if flash[:danger] %>
+				<div class="flash">
+					<%= flash[:danger] %>
+				</div>
+			<% end %>
 			<%= form_for @hobby do |f| %>
 				<%= f.file_field :images, multiple: true, id: "hobby_img_edit" %><br>
 				<div id="img_prev_show">

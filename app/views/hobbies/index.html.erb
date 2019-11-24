@@ -32,9 +32,9 @@
 		<%= search_form_for @q, url: search_hobbies_path, method: :post, class: 'submit' do |f| %>
 			<%= f.label :sorts, "並べ替え" %>
 			<% if @sort == "true" %>
-				<%= f.select :sorts, [['新しい投稿順','id desc'],['古い投稿順', 'id asc'], ['人気チャレンジ','challenges_count desc'], ['びっくり順', 'surprises_count desc']], selected: params[:q][:sorts] %>
+				<%= f.select :sorts, [['新しい投稿順','id asc'],['古い投稿順', 'id desc'], ['人気チャレンジ','challenges_count asc'], ['びっくり順', 'surprises_count asc']], selected: params[:q][:sorts] %>
 			<% else %>
-				<%= f.select :sorts, [['新しい投稿順','id desc'],['古い投稿順', 'id asc'], ['人気チャレンジ順','challenges_count desc'], ['びっくり順', 'surprises_count desc']]
+				<%= f.select :sorts, [['新しい投稿順','id asc'],['古い投稿順', 'id desc'], ['人気チャレンジ順','challenges_count asc'], ['びっくり順', 'surprises_count asc']]
 				%>
 			<% end %>
 		<% end %>
@@ -76,6 +76,30 @@
 							</p>
 						</div>
 					<% end %>
+					<p>
+						<% if hobby.challenge_by?(current_user) %>
+							<i id="challenge_icon" class="fas fa-fire-alt fire_icon fa-2x">
+							</i>
+							<%= hobby.challenges.count
+							%>
+						<% else %>
+							<i id="challenge_icon" class="fas fa-fire-alt fa-2x">
+							</i>
+							<%= hobby.challenges.count
+							%>
+						<% end %>
+						<% if hobby.surprise_by?(current_user) %>
+							<i id="surprise_icon" class="far fa-surprise fa-2x surprise_icon">
+							</i>
+							<%= hobby.surprises.count
+							%>
+						<% else %>
+							<i id="surprise_icon" class="far fa-surprise fa-2x">
+							</i>
+							<%= hobby.surprises.count
+							%>
+						<% end %>
+					</p>
 				</div>
 			</div>
 		<% end %>

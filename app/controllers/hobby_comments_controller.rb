@@ -22,6 +22,9 @@ class HobbyCommentsController < ApplicationController
 	def destroy
 		comment = HobbyComment.find(params[:hobby_id])
 		@hobby = comment.hobby
+		if comment.user != current_user
+			redirect_to hobby_path(@hobby.id)
+		end
 		replies = HobbyComment.where(reply_comment: comment.id)
 		replies.delete_all
 		comment.destroy
@@ -32,6 +35,9 @@ class HobbyCommentsController < ApplicationController
 	def update
 		comment = HobbyComment.find(params[:hobby_id])
 		@hobby = comment.hobby
+		if comment.user != current_user
+			redirect_to hobby_path(@hobby.id)
+		end
 		if comment.private == false
 			comment.private = true
 			@private = "true"
