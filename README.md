@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+ARBBY
+====
+趣味を投稿し共有するアプリです。
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 説明
+このアプリは、投稿された趣味をもとに趣味を見つけていただくアプリでもあります。<br>
+趣味のマッチングアプリを目指し作成致しました。<br>
+ユーザが投稿を見て、チャレンジしてみたい！！と感じた趣味に「チャレンジボタン」を押します。
+チャレンジボタンが押された趣味を参考に、計画（カレンダー）をたてチャレンジするという流れです。
