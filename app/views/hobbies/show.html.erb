@@ -3,10 +3,10 @@
 		<%= link_to user_path(@hobby.user) do %>
 			<%= image_tag @hobby.user.profile_image.to_s,  class: "round_img profile_image_show" %>
 			<p class="hobby-show-name">
-			<% if @hobby.user.nickname == nil %>
-				<%= @hobby.user.name %>
-			<% else %>
+			<% if @hobby.user.nickname? %>
 				<%= @hobby.user.nickname %>
+			<% else %>
+				<%= @hobby.user.name %>
 			<% end %>
 			</p>
 		<% end %>
@@ -51,6 +51,41 @@
 			<p><%= link_to '編集する', edit_hobby_path(@hobby.id) %> /
 				<%= link_to '削除する', hobby_path, method: :delete %>
 			</p>
+		<% else %>
+		<!-- 通報ボタンを表示 -->
+			<button type="button" class="btn btn-dark margin-bottom" data-toggle="modal" data-target="#modal-notice">通報する
+			</button>
+			<div class="modal fade" id="modal-notice" tabindex="-1"role="dialog" aria-labelledby="label1" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+				    	<div class="modal-header">
+					        <h5 class="modal-title" id="label1">通報理由選択
+					        </h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;
+					          </span>
+					        </button>
+				      	</div>
+				      	<%= form_with url: notice_path(@hobby.user.id), method: :patch, remote: true do |f| %>
+					        <div class="modal-body">
+					        <%= f.radio_button :notice_id, 2 %>
+					        <%= f.label :notice_id, "迷惑行為" , class: "margin-right" %>
+
+					        <%= f.radio_button :notice_id, 3 %>
+					        <%= f.label :notice_id, "誹謗中傷", class: "margin-right" %>
+
+					        <%= f.radio_button :notice_id, 4 %>
+					        <%= f.label :notice_id, "その他" %>
+					        </div>
+						    <div class="modal-footer">
+							  	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+						        </button>
+						        <%= f.submit '通報する', class: "btn btn-dark" %>
+					      	</div>
+				      	<% end %>
+				    </div>
+				</div>
+			</div>
 		<% end %>
 	</div>
 

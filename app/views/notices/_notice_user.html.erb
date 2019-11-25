@@ -1,0 +1,18 @@
+<table class="table">
+	<thead>
+		<th>ユーザ名</th>
+		<th>通報理由</th>
+		<th></th>
+		<th></th>
+	</thead>
+	<% users.each do |user| %>
+		<tr>
+			<td><%= image_tag user.profile_image.to_s, class: "round_img profile_image_comment" %>
+				<%= user.name %>
+			</td>
+			<td><%= user.notice.reason %></td>
+			<td><%= link_to 'ユーザ詳細へ', admin_user_path(user.id), class: 'btn btn-outline-secondary' %></td>
+			<td><%= link_to '退会させる', notice_path(user.id), method: :delete, remote: true, class: 'btn btn-outline-danger' %></td>
+		</tr>
+	<% end %>
+</table>

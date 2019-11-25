@@ -47,4 +47,6 @@ Rails.application.routes.draw do
   delete 'events/delete_all'
   resources :events, only: [:create, :index, :update, :destroy]
 
+  resources :notices, only: [:update, :index, :destroy]
+
 end
