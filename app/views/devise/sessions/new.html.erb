@@ -2,6 +2,11 @@
   <div class="container">
       <div class="text-center sign-box">
         <div class="sign-box-mini">
+
+          <% if flash[:notice] %>
+            <h5><%= flash[:notice] %></h5>
+          <% end %>
+
           <h2>Log in</h2>
 
           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>

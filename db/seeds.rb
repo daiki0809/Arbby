@@ -8,6 +8,27 @@
 
 Admin.create!(email: 'test@acount', password: '201909')
 
+Notice.create!(
+	[
+		{
+			judgement: false,
+			reason: '追放されていない'
+		},
+		{
+			judgement: true,
+			reason: '迷惑行為'
+		},
+		{
+			judgement: true,
+			reason: '誹謗中傷'
+		},
+		{
+			judgement: true,
+			reason: 'その他'
+		}
+	]
+)
+
 Genre.create!(
 	[
 		{

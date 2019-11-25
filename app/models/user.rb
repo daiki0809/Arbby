@@ -13,10 +13,13 @@ class User < ApplicationRecord
          has_many :hobby_comments, dependent: :destroy
 
          belongs_to :level
+         belongs_to :notice
 
          validates :name, presence: true
+         validates :email, uniqueness: {conditions: ->{with_deleted}}
 
          acts_as_paranoid
+
 # ツイッターでログインの記述
     def self.find_for_oauth(auth)
     	user = User.where(uid: auth.uid, provider: auth.provider).first

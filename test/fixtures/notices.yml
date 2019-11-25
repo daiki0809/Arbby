@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  judgement: false
+  reason: MyText
+
+two:
+  judgement: false
+  reason: MyText

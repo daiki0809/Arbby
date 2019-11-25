@@ -47,10 +47,10 @@
 				<div class="hobby_box">
 					<%= image_tag hobby.user.profile_image.to_s, class: "round_img hobby_index_profile_img" %>
 
-					<% if hobby.user.nickname == nil %>
-						<%= hobby.user.name %>
-					<% else %>
+					<% if hobby.user.nickname? %>
 						<%= hobby.user.nickname %>
+					<% else %>
+						<%= hobby.user.name %>
 					<% end %>
 						<br>
 
