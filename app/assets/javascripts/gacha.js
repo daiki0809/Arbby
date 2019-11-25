@@ -1,4 +1,6 @@
+
 Swal.fire('ガチャの心得', 'いかなる趣味も受け入れること!<br>これ出来ぬ者、ガチャ引くべからず！');
+
 
 function repeat_show(elems$) {
 	console.log('1')

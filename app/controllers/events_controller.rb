@@ -39,7 +39,7 @@ before_action :authenticate_user!
 
 	def destroy
 		event = Event.find(params[:id])
-		if @event.user != current_user
+		if event.user != current_user
 			redirect_to events_path
 		end
 		event.destroy
