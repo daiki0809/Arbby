@@ -9,7 +9,7 @@
 			<%= form_for @hobby do |f| %>
 				<%= f.file_field :images, multiple: true, id: "hobby_img_edit" %><br>
 				<div id="img_prev_show">
-			<!-- 画像をプレビュ -->
+				<!-- 画像をプレビュ -->
 					<% @hobby.images.each do |i| %>
 						<%= image_tag i.to_s, class: "img_prev" %>
 					<% end %>
@@ -17,8 +17,7 @@
 				<%= f.label :title, "タイトル" %><br>
 				<%= f.text_field :title, class: "margin-bottom col-lg-8" %><br>
 				<%= f.label :body, "本文" %><br>
-				<%= f.text_area :body, class: "margin-bottom col-lg-8" %>
-				<br>
+				<%= f.text_area :body, class: "margin-bottom col-lg-8" %><br>
 				<%= label_tag :genre, "ジャンル" %>
 				<%= select_tag 'genre', options_from_collection_for_select(Genre.all, :id, :genre_name, { :selected => @hobby.genre_id }), class: "margin-bottom" %><br>
 				<%= label_tag :provisional, "予算" %><br>

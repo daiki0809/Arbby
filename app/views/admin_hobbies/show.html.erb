@@ -12,31 +12,29 @@
 				<img src="../../assets/hobby_no_image.jpeg" class="hobby_img_show">
 			</div>
 		<% else %>
-		<!-- 写真が一枚ならスライドショーをさせない -->
+			<!-- 写真が一枚ならスライドショーをさせない -->
 			<% if @hobby.images.length == 1 %>
 				<div class="text-center">
 			<% else %>
 				<div class="slider_show">
 			<% end %>
-				<% @hobby.images.each do |i| %>
-					<%= image_tag i.to_s, class: "hobby_img_show" %>
-				<% end %>
-				</div>
+			<% @hobby.images.each do |i| %>
+				<%= image_tag i.to_s, class: "hobby_img_show" %>
+			<% end %>
+			</div>
 		<% end %>
 	</div>
 
 	<div class="clearfix hobby-btn-box">
 		<!-- チャレンジボタン -->
 		<div id="challenge_button" class="hobby-btn">
-			<i id="challenge_icon" class="fas fa-fire-alt fa-3x fire_icon">
-			</i>
+			<i id="challenge_icon" class="fas fa-fire-alt fa-3x fire_icon"></i>
 			<%= @hobby.challenges.count %> チャレンジ
 		</div>
 
 		<!-- びっくりボタン -->
 		<div id="surprise_button" class="hobby-btn">
-			<i id="surprise_icon" class="far fa-surprise fa-3x surprise_icon">
-			</i>
+			<i id="surprise_icon" class="far fa-surprise fa-3x surprise_icon"></i>
 			<%= @hobby.surprises.count %> びっくり
 		</div>
 	</div>
@@ -46,9 +44,7 @@
 		<p><%= @hobby.body %></p>
 		<p>ジャンル：<%= @hobby.genre.genre_name %></p>
 		<p>予算：<%= @hobby.budget %>円</p>
-		<p>
-			<%= link_to '削除する', admin_hobby_path, method: :delete, class: "btn btn-outline-danger" %>
-		</p>
+		<p><%= link_to '削除する', admin_hobby_path, method: :delete, class: "btn btn-outline-danger" %></p>
 	</div>
 
 	<!-- コメント一覧表示 -->
@@ -58,7 +54,6 @@
 				<% @comments.each do |comment| %>
 					<tr data-toggle="collapse" data-target=".reply_comment<%= comment.id %>" class="accordion-toggle">
 						<td style="width:20%"><%= image_tag comment.user.profile_image.to_s, class: "round_img profile_image_comment" %>
-
 						<% if comment.user.nickname? %>
 							<%= comment.user.nickname %>
 						<% else %>
@@ -79,21 +74,18 @@
 				    	<tr>
 				    		<td class="hiddenRow">
 				    			<div class="accordian-body collapse reply_comment<%= comment.id %>">
-				    				<%= image_tag reply.user.profile_image.to_s, class: "round_img reply_image"
-				    				%>
-
+				    				<%= image_tag reply.user.profile_image.to_s, class: "round_img reply_image"%>
 									<% if reply.user.nickname? %>
-											<%= reply.user.nickname %>
+										<%= reply.user.nickname %>
 									<% else %>
-											<%= replyuser.name %>
+										<%= replyuser.name %>
 									<% end %>
 								</div>
 							</td>
 							<td class="hiddenRow">
 								<div class="accordian-body collapse reply_comment<%= comment.id %>">
 									<%= reply.comment %>
-									<i class="fas fa-level-up-alt">
-									</i>
+									<i class="fas fa-level-up-alt"></i>
 				    			</div>
 				    		</td>
 						</tr>
