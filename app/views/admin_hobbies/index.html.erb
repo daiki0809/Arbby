@@ -11,7 +11,6 @@
 			<%= f.label :genre, "ジャンル" %>
 			<% if @search == "true" %>
 				<%= f.select :genre_id_eq, options_for_select([["運動系", 1], ["頭脳系", 2], ["作る系", 3], ["学ぶ系", 4], ["自然系", 5], ["その他", 6]], selected: params[:q][:genre_id_eq]), include_blank: true %>
-
 				<%= f.label :budget, "予算" %>
 				<%= f.number_field :budget_gteq, value: params[:q][:budget_gteq].to_i %>円〜
 				<% if params[:q][:budget_lt].to_i == 0 %>
@@ -21,12 +20,11 @@
 				<% end %>
 			<% else %>
 				<%= f.select :genre_id_eq, options_for_select([["運動系", 1], ["頭脳系", 2], ["作る系", 3], ["学ぶ系", 4], ["自然系", 5], ["その他", 6]]), include_blank: true %>
-
 				<%= f.label :budget, "予算" %>
-				<%= f.number_field :budget_gteq  %>円〜
+				<%= f.number_field :budget_gteq %>円〜
 				<%= f.number_field :budget_lt %>円未満
 			<% end %>
-			<%= f.submit "検索" %>
+			<%= f.submit "検索", class: 'btn btn-outline-secondary' %>
 		<% end %>
 
 		<!-- 並び替え -->
@@ -35,8 +33,7 @@
 			<% if @sort == "true" %>
 				<%= f.select :sorts, [['新しい投稿順','id desc'],['古い投稿順', 'id asc'], ['人気チャレンジ','challenges_count desc'], ['びっくり順', 'surprises_count desc']], selected: params[:q][:sorts] %>
 			<% else %>
-				<%= f.select :sorts, [['新しい投稿順','id desc'],['古い投稿順', 'id asc'], ['人気チャレンジ順','challenges_count desc'], ['びっくり順', 'surprises_count desc']]
-				%>
+				<%= f.select :sorts, [['新しい投稿順','id desc'],['古い投稿順', 'id asc'], ['人気チャレンジ順','challenges_count desc'], ['びっくり順', 'surprises_count desc']]%>
 			<% end %>
 		<% end %>
 	</div>
@@ -76,14 +73,19 @@
 							<p><%= hobby.title %></p>
 						</div>
 					<% end %>
+					<p>
+						<i id="challenge_icon" class="fas fa-fire-alt fa-2x"></i>
+						<%= hobby.challenges.count%>
+						<i id="surprise_icon" class="far fa-surprise fa-2x"></i>
+						<%= hobby.surprises.count%>
+					</p>
 				</div>
 			</div>
 		<% end %>
 	</div>
 	<div class="text-center">
 		<!-- kaminariのページャ -->
-		<%= paginate @hobbies, class: "paginate"
-			%>
+		<%= paginate @hobbies, class: "paginate"%>
 	</div>
 </div>
 

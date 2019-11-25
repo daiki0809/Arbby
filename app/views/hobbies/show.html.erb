@@ -3,11 +3,11 @@
 		<%= link_to user_path(@hobby.user) do %>
 			<%= image_tag @hobby.user.profile_image.to_s,  class: "round_img profile_image_show" %>
 			<p class="hobby-show-name">
-			<% if @hobby.user.nickname? %>
-				<%= @hobby.user.nickname %>
-			<% else %>
-				<%= @hobby.user.name %>
-			<% end %>
+				<% if @hobby.user.nickname? %>
+					<%= @hobby.user.nickname %>
+				<% else %>
+					<%= @hobby.user.name %>
+				<% end %>
 			</p>
 		<% end %>
 		<!-- 写真がなければノーイメージを表示-->
@@ -59,27 +59,24 @@
 				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
 				    	<div class="modal-header">
-					        <h5 class="modal-title" id="label1">通報理由選択
-					        </h5>
+					        <h5 class="modal-title" id="label1">通報理由選択</h5>
 					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;
-					          </span>
+					          <span aria-hidden="true">&times;</span>
 					        </button>
 				      	</div>
 				      	<%= form_with url: notice_path(@hobby.user.id), method: :patch, remote: true do |f| %>
 					        <div class="modal-body">
-					        <%= f.radio_button :notice_id, 2 %>
-					        <%= f.label :notice_id, "迷惑行為" , class: "margin-right" %>
+						        <%= f.radio_button :notice_id, 2 %>
+						        <%= f.label :notice_id, "迷惑行為" , class: "margin-right" %>
 
-					        <%= f.radio_button :notice_id, 3 %>
-					        <%= f.label :notice_id, "誹謗中傷", class: "margin-right" %>
+						        <%= f.radio_button :notice_id, 3 %>
+						        <%= f.label :notice_id, "誹謗中傷", class: "margin-right" %>
 
-					        <%= f.radio_button :notice_id, 4 %>
-					        <%= f.label :notice_id, "その他" %>
+						        <%= f.radio_button :notice_id, 4 %>
+						        <%= f.label :notice_id, "その他" %>
 					        </div>
 						    <div class="modal-footer">
-							  	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-						        </button>
+							  	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 						        <%= f.submit '通報する', class: "btn btn-dark" %>
 					      	</div>
 				      	<% end %>

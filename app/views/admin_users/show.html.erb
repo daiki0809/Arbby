@@ -1,16 +1,15 @@
 <div class="container">
 	<div class="row">
 		<div class="user_info col-lg-3 text-center margin-top">
-				<%= image_tag @user.profile_image.to_s, class: "profile_image_show round_img" %>
+			<%= image_tag @user.profile_image.to_s, class: "profile_image_show round_img" %>
 
-				<% if @user.nickname? %>
-					<h3><%= @user.nickname %></h3>
-				<% else %>
-					<h3><%= @user.name %></h3>
-				<% end %>
+			<% if @user.nickname? %>
+				<h3><%= @user.nickname %></h3>
+			<% else %>
+				<h3><%= @user.name %></h3>
+			<% end %>
 
-				<P id="user_level">レベル.<%= @user.level_id %>
-				</P>
+			<P id="user_level">レベル.<%= @user.level_id %></P>
 		</div>
 <!-- ユーザ投稿一覧 -->
 		<div class="hobbes_box col-lg-9 margin-top">
@@ -18,27 +17,27 @@
 				<% @hobbies.each do |hobby| %>
 					<div class="col-lg-6">
 						<div class="hobby_box margin-bottom text-center">
-									<%= link_to admin_hobby_path(hobby.id) do %>
-									<div class="hobby_img mx-auto margin-top">
-											<!-- 写真がなければ表示しない -->
-										<% if hobby.images. == [] %>
-											<div class="bx-wrapper">
-												<img src="../../assets/hobby_no_image.jpeg" class="hobby_img_index">
-											</div>
+							<%= link_to admin_hobby_path(hobby.id) do %>
+								<div class="hobby_img mx-auto margin-top">
+									<!-- 写真がなければ表示しない -->
+									<% if hobby.images. == [] %>
+										<div class="bx-wrapper">
+											<img src="../../assets/hobby_no_image.jpeg" class="hobby_img_index">
+										</div>
+									<% else %>
+									<!-- 写真が一枚ならスライドショーをさせない -->
+										<% if hobby.images.length == 1 %>
+											<div class="bx-wrapper user_hobby_img">
 										<% else %>
-										<!-- 写真が一枚ならスライドショーをさせない -->
-											<% if hobby.images.length == 1 %>
-												<div class="bx-wrapper user_hobby_img">
-											<% else %>
-												<div class="slider_index user_hobby_img">
-											<% end %>
-													<% hobby.images.each do |i| %>
-														<%= image_tag i.to_s, class: "hobby_img_index" %>
-													<% end %>
-												</div>
+											<div class="slider_index user_hobby_img">
 										<% end %>
-										<div class="user_hobby_title"><%= hobby.title %></div>
-									</div><br>
+												<% hobby.images.each do |i| %>
+													<%= image_tag i.to_s, class: "hobby_img_index" %>
+												<% end %>
+											</div>
+									<% end %>
+									<div class="user_hobby_title"><%= hobby.title %></div>
+								</div><br>
 							<% end %>
 						</div>
 					</div>

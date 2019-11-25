@@ -1,6 +1,6 @@
 <div class="container">
 	<!-- 検索表示ボタン -->
-	<button  id="search-btn" class="btn btn-outline-dark">
+	<button id="search-btn" class="btn btn-outline-dark">
 		<i id="sesrch-icon" class="fas fa-search"></i>
 	</button>
 
@@ -25,7 +25,7 @@
 				<%= f.number_field :budget_gteq  %>円〜
 				<%= f.number_field :budget_lt %>円未満
 			<% end %>
-			<%= f.submit "検索" %>
+			<%= f.submit "検索", class: 'btn btn-outline-secondary' %>
 		<% end %>
 
 		<!-- 並び替え -->
@@ -51,7 +51,7 @@
 					<% else %>
 						<%= hobby.user.name %>
 					<% end %>
-						<br>
+					<br>
 
 					<%= link_to hobby_path(hobby.id) do %>
 						<div class="hobby_img mx-auto">
@@ -72,38 +72,30 @@
 								<% end %>
 								</div>
 							<% end %>
-							<p class="btn btn-outline-dark"><%= hobby.title %>
-							</p>
+							<p class="btn btn-outline-dark"><%= hobby.title %></p>
 						</div>
 					<% end %>
 					<p>
 						<% if hobby.challenge_by?(current_user) %>
-							<i id="challenge_icon" class="fas fa-fire-alt fire_icon fa-2x">
-							</i>
-							<%= hobby.challenges.count
-							%>
+							<i id="challenge_icon" class="fas fa-fire-alt fire_icon fa-2x"></i>
+							<%= hobby.challenges.count%>
 						<% else %>
-							<i id="challenge_icon" class="fas fa-fire-alt fa-2x">
-							</i>
-							<%= hobby.challenges.count
-							%>
+							<i id="challenge_icon" class="fas fa-fire-alt fa-2x"></i>
+							<%= hobby.challenges.count%>
 						<% end %>
 						<% if hobby.surprise_by?(current_user) %>
-							<i id="surprise_icon" class="far fa-surprise fa-2x surprise_icon">
-							</i>
-							<%= hobby.surprises.count
-							%>
+							<i id="surprise_icon" class="far fa-surprise fa-2x surprise_icon"></i>
+							<%= hobby.surprises.count%>
 						<% else %>
-							<i id="surprise_icon" class="far fa-surprise fa-2x">
-							</i>
-							<%= hobby.surprises.count
-							%>
+							<i id="surprise_icon" class="far fa-surprise fa-2x"></i>
+							<%= hobby.surprises.count%>
 						<% end %>
 					</p>
 				</div>
 			</div>
 		<% end %>
 	</div>
+
 	<div class="text-center">
 		<!-- kaminariのページャ -->
 		<%= paginate @hobbies, class: "paginate"%>
