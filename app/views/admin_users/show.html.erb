@@ -18,7 +18,7 @@
 				<% @hobbies.each do |hobby| %>
 					<div class="col-lg-6">
 						<div class="hobby_box margin-bottom text-center">
-									<%= link_to hobby_path(hobby.id) do %>
+									<%= link_to admin_hobby_path(hobby.id) do %>
 									<div class="hobby_img mx-auto margin-top">
 											<!-- 写真がなければ表示しない -->
 										<% if hobby.images. == [] %>
