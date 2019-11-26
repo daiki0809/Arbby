@@ -10,7 +10,6 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require turbolinks
 //= require jquery
 //= require moment
 //= require moment/ja.js
@@ -22,10 +21,9 @@
 //= require rails-ujs
 //= require bxslider
 //= require activestorage
-//= require_tree .
 
 // スライドショー
-jQuery(document).on('turbolinks:load', function(){
+jQuery(function(){
 	  $('.slider_index').bxSlider({
 	    auto: true,           // 自動スライド
 	    speed: 1000,          // スライドするスピード
@@ -39,7 +37,7 @@ jQuery(document).on('turbolinks:load', function(){
 	  });
 	});
 
-jQuery(document).on('turbolinks:load', function(){
+jQuery(function(){
 	  $('.slider_show').bxSlider({
 	    auto: true,           // 自動スライド
 	    speed: 1000,          // スライドするスピード
@@ -54,7 +52,7 @@ jQuery(document).on('turbolinks:load', function(){
 	});
 
 // カレンダー
-jQuery(document).on('turbolinks:load', function(){
+jQuery(function(){
   $('#calendar-modal').click(function() {
     $('.menu-trigger').toggleClass('active');
     $('#sp-menu').fadeToggle();
@@ -119,7 +117,7 @@ jQuery(document).on('turbolinks:load', function(){
 });
 
 // カレンダー一括削除
-jQuery(document).on('turbolinks:load', function(){
+jQuery(function(){
   $("#event-delete_all_btn").click(function(){
   Swal.fire({
     title: '本当に削除しますか？',
@@ -140,7 +138,7 @@ jQuery(document).on('turbolinks:load', function(){
 });
 
 // ハンバーガメニュー
-jQuery(document).on('turbolinks:load', function(){
+jQuery(function(){
   $(function() {
     $('.menu-trigger').on('click', function() {
       $(this).toggleClass('active');
