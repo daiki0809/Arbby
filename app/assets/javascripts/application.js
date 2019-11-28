@@ -21,6 +21,7 @@
 //= require rails-ujs
 //= require bxslider
 //= require activestorage
+//= require users.coffee
 
 // スライドショー
 jQuery(function(){
