@@ -3,7 +3,6 @@ Swal.fire('ガチャの心得', 'いかなる趣味も受け入れること!<br>
 
 
 function repeat_show(elems$) {
-	console.log('1')
 		loopSleep( gon.rare, 200, function(i){elems$.eq(i).addClass('rare-show');
 		});
 
@@ -15,7 +14,7 @@ function repeat_show(elems$) {
 		  var loopFunc = function () {
 		    var result = mainFunc(i);
 		    if (result === false) {
-		      // break機能
+		      // break機能(exitだとその後の処理がされない)
 		      return;
 		    }
 		    i = i + 1;

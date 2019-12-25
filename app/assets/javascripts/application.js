@@ -59,11 +59,11 @@ jQuery(function(){
     $('#sp-menu').fadeToggle();
     $('#calendar').fullCalendar('destroy');
       var currentEvents = {};
-             $.ajaxSetup({ cache: false });
+             $.ajaxSetup({ cache: false });   //イベントの内容が変更された状態のデータを持ってくるため
              $.ajax({
                  url: '/events/catch',
                  dataType: 'json',
-                 async: false,
+                 async: false,  //処理の分岐をさせないため
                  success: function(data) {
                   $('#calendar').fullCalendar({
                     lang: 'ja',
@@ -120,22 +120,22 @@ jQuery(function(){
 // カレンダー一括削除
 jQuery(function(){
   $("#event-delete_all_btn").click(function(){
-  Swal.fire({
-    title: '本当に削除しますか？',
-    text: '一度削除すると、イベントは戻せません',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'OK'
-  }).then((result) => {
-    if (result.value) {
-      $.ajax({
-        url: '/events/delete_all',
-        type: 'delete',
-      });
-    }
+    Swal.fire({
+      title: '本当に削除しますか？',
+      text: '一度削除すると、イベントは戻せません',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'OK'
+    }).then((result) => {
+      if (result.value) {
+        $.ajax({
+          url: '/events/delete_all',
+          type: 'delete',
+        });
+      }
+    });
   });
-});
 });
 
 // ハンバーガメニュー
@@ -144,7 +144,7 @@ jQuery(function(){
     $('.menu-trigger').on('click', function() {
       $(this).toggleClass('active');
       $('#sp-menu').fadeToggle();
-      return false;
+      return false;   //親要素のイベント発火を止める
     });
    });
 });
