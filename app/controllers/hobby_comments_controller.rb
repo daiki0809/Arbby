@@ -7,7 +7,7 @@ class HobbyCommentsController < ApplicationController
 		@hobby = Hobby.find(params[:hobby_id])
 		hobby_comment = current_user.hobby_comments.new(hobby_comment_params)
 		hobby_comment.hobby_id = @hobby.id
-		if params[:reply] == "true"
+		if params[:reply] == "true"		#コメントに対する返信か判断
 			@comment_id = params[:comment_id]
 			hobby_comment.reply_comment = @comment_id
 		end
